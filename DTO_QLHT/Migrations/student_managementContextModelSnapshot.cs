@@ -49,52 +49,41 @@ namespace DTO_QLHT.Migrations
                     b.ToTable("Classrooms");
                 });
 
-            modelBuilder.Entity("Exam", b =>
+            modelBuilder.Entity("ClassroomStudent", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("ClassroomsId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("StudentId")
+                    b.Property<int>("StudentsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeachId")
-                        .HasColumnType("int");
+                    b.HasKey("ClassroomsId", "StudentsId");
 
-                    b.HasKey("Id");
+                    b.HasIndex("StudentsId");
 
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("TeachId");
-
-                    b.ToTable("Exams");
+                    b.ToTable("ClassroomStudent");
                 });
 
-            modelBuilder.Entity("FinalExam", b =>
+            modelBuilder.Entity("FinalGrade", b =>
                 {
-                    b.Property<int>("ExamId")
+                    b.Property<int>("SubjectGradeSemesterId")
                         .HasColumnType("int");
 
                     b.Property<float>("Score")
                         .HasColumnType("real");
 
-                    b.HasKey("ExamId");
+                    b.HasKey("SubjectGradeSemesterId");
 
-                    b.ToTable("FinalExams");
+                    b.ToTable("FinalGrades");
                 });
 
-            modelBuilder.Entity("NormalExam", b =>
+            modelBuilder.Entity("NormalGrade", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Factor")
                         .HasColumnType("int");
@@ -102,11 +91,14 @@ namespace DTO_QLHT.Migrations
                     b.Property<float>("Score")
                         .HasColumnType("real");
 
+                    b.Property<int>("SubjectGradeSemesterId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ExamId");
+                    b.HasIndex("SubjectGradeSemesterId");
 
-                    b.ToTable("NormalExams");
+                    b.ToTable("NormalGrades");
                 });
 
             modelBuilder.Entity("Student", b =>
@@ -119,9 +111,6 @@ namespace DTO_QLHT.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ClassroomId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("Dob")
                         .HasColumnType("datetime2");
@@ -144,8 +133,6 @@ namespace DTO_QLHT.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClassroomId");
 
                     b.ToTable("Students");
                 });
@@ -170,6 +157,50 @@ namespace DTO_QLHT.Migrations
                     b.ToTable("Subjects");
                 });
 
+            modelBuilder.Entity("SubjectGrade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeachId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TeachId");
+
+                    b.ToTable("SubjectGrades");
+                });
+
+            modelBuilder.Entity("SubjectGradeSemester", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Semester")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectGradeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectGradeId");
+
+                    b.ToTable("SubjectGradeSemesters");
+                });
+
             modelBuilder.Entity("Teach", b =>
                 {
                     b.Property<int>("Id")
@@ -179,9 +210,6 @@ namespace DTO_QLHT.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("ClassroomId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Semester")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
@@ -275,7 +303,44 @@ namespace DTO_QLHT.Migrations
                     b.Navigation("HomeroomTeacher");
                 });
 
-            modelBuilder.Entity("Exam", b =>
+            modelBuilder.Entity("ClassroomStudent", b =>
+                {
+                    b.HasOne("Classroom", null)
+                        .WithMany()
+                        .HasForeignKey("ClassroomsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FinalGrade", b =>
+                {
+                    b.HasOne("SubjectGradeSemester", "SubjectGradeSemester")
+                        .WithOne("FinalGrade")
+                        .HasForeignKey("FinalGrade", "SubjectGradeSemesterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SubjectGradeSemester");
+                });
+
+            modelBuilder.Entity("NormalGrade", b =>
+                {
+                    b.HasOne("SubjectGradeSemester", "SubjectGradeSemester")
+                        .WithMany("NormalGrades")
+                        .HasForeignKey("SubjectGradeSemesterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SubjectGradeSemester");
+                });
+
+            modelBuilder.Entity("SubjectGrade", b =>
                 {
                     b.HasOne("Student", "Student")
                         .WithMany()
@@ -284,7 +349,7 @@ namespace DTO_QLHT.Migrations
                         .IsRequired();
 
                     b.HasOne("Teach", "Teach")
-                        .WithMany()
+                        .WithMany("SubjectGrade")
                         .HasForeignKey("TeachId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -294,39 +359,21 @@ namespace DTO_QLHT.Migrations
                     b.Navigation("Teach");
                 });
 
-            modelBuilder.Entity("FinalExam", b =>
+            modelBuilder.Entity("SubjectGradeSemester", b =>
                 {
-                    b.HasOne("Exam", "Exam")
-                        .WithOne("FinalExam")
-                        .HasForeignKey("FinalExam", "ExamId")
+                    b.HasOne("SubjectGrade", "SubjectGrade")
+                        .WithMany("SubjectGradeSemesters")
+                        .HasForeignKey("SubjectGradeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Exam");
-                });
-
-            modelBuilder.Entity("NormalExam", b =>
-                {
-                    b.HasOne("Exam", "Exam")
-                        .WithMany("NormalExams")
-                        .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Exam");
-                });
-
-            modelBuilder.Entity("Student", b =>
-                {
-                    b.HasOne("Classroom", null)
-                        .WithMany("Students")
-                        .HasForeignKey("ClassroomId");
+                    b.Navigation("SubjectGrade");
                 });
 
             modelBuilder.Entity("Teach", b =>
                 {
                     b.HasOne("Classroom", "Classroom")
-                        .WithMany()
+                        .WithMany("Teaches")
                         .HasForeignKey("ClassroomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -363,15 +410,25 @@ namespace DTO_QLHT.Migrations
 
             modelBuilder.Entity("Classroom", b =>
                 {
-                    b.Navigation("Students");
+                    b.Navigation("Teaches");
                 });
 
-            modelBuilder.Entity("Exam", b =>
+            modelBuilder.Entity("SubjectGrade", b =>
                 {
-                    b.Navigation("FinalExam")
+                    b.Navigation("SubjectGradeSemesters");
+                });
+
+            modelBuilder.Entity("SubjectGradeSemester", b =>
+                {
+                    b.Navigation("FinalGrade")
                         .IsRequired();
 
-                    b.Navigation("NormalExams");
+                    b.Navigation("NormalGrades");
+                });
+
+            modelBuilder.Entity("Teach", b =>
+                {
+                    b.Navigation("SubjectGrade");
                 });
 
             modelBuilder.Entity("Teacher", b =>

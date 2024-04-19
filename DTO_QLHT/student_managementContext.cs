@@ -13,10 +13,11 @@ namespace DTO_QLHT
         public DbSet<Student> Students { get; set; }
         public DbSet<Teach> Teaches { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<Exam> Exams { get; set; }
-        public DbSet<NormalExam> NormalExams { get; set; }
+        public DbSet<SubjectGrade> SubjectGrades { get; set; }
+        public DbSet<SubjectGradeSemester> SubjectGradeSemesters { get; set; }
+        public DbSet<NormalGrade> NormalGrades { get; set; }
 
-        public DbSet<FinalExam> FinalExams { get; set; }
+        public DbSet<FinalGrade> FinalGrades { get; set; }
 
         public DbSet<Classroom> Classrooms { get; set; }
 

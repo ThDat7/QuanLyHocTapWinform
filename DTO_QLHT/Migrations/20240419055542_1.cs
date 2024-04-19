@@ -10,6 +10,25 @@ namespace DTO_QLHT.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Dob = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Sex = table.Column<int>(type: "int", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Subjects",
                 columns: table => new
                 {
@@ -86,28 +105,27 @@ namespace DTO_QLHT.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Students",
+                name: "ClassroomStudent",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Dob = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Sex = table.Column<int>(type: "int", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClassroomId = table.Column<int>(type: "int", nullable: true)
+                    ClassroomsId = table.Column<int>(type: "int", nullable: false),
+                    StudentsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.PrimaryKey("PK_ClassroomStudent", x => new { x.ClassroomsId, x.StudentsId });
                     table.ForeignKey(
-                        name: "FK_Students_Classrooms_ClassroomId",
-                        column: x => x.ClassroomId,
+                        name: "FK_ClassroomStudent_Classrooms_ClassroomsId",
+                        column: x => x.ClassroomsId,
                         principalTable: "Classrooms",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ClassroomStudent_Students_StudentsId",
+                        column: x => x.StudentsId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -116,7 +134,6 @@ namespace DTO_QLHT.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Semester = table.Column<int>(type: "int", nullable: false),
                     TeacherId = table.Column<int>(type: "int", nullable: false),
                     SubjectId = table.Column<int>(type: "int", nullable: false),
                     ClassroomId = table.Column<int>(type: "int", nullable: false)
@@ -145,7 +162,7 @@ namespace DTO_QLHT.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Exams",
+                name: "SubjectGrades",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -155,15 +172,15 @@ namespace DTO_QLHT.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Exams", x => x.Id);
+                    table.PrimaryKey("PK_SubjectGrades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Exams_Students_StudentId",
+                        name: "FK_SubjectGrades_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Exams_Teaches_TeachId",
+                        name: "FK_SubjectGrades_Teaches_TeachId",
                         column: x => x.TeachId,
                         principalTable: "Teaches",
                         principalColumn: "Id",
@@ -171,40 +188,60 @@ namespace DTO_QLHT.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FinalExams",
+                name: "SubjectGradeSemesters",
                 columns: table => new
                 {
-                    ExamId = table.Column<int>(type: "int", nullable: false),
-                    Score = table.Column<float>(type: "real", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Semester = table.Column<int>(type: "int", nullable: false),
+                    SubjectGradeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FinalExams", x => x.ExamId);
+                    table.PrimaryKey("PK_SubjectGradeSemesters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FinalExams_Exams_ExamId",
-                        column: x => x.ExamId,
-                        principalTable: "Exams",
+                        name: "FK_SubjectGradeSemesters_SubjectGrades_SubjectGradeId",
+                        column: x => x.SubjectGradeId,
+                        principalTable: "SubjectGrades",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "NormalExams",
+                name: "FinalGrades",
+                columns: table => new
+                {
+                    SubjectGradeSemesterId = table.Column<int>(type: "int", nullable: false),
+                    Score = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FinalGrades", x => x.SubjectGradeSemesterId);
+                    table.ForeignKey(
+                        name: "FK_FinalGrades_SubjectGradeSemesters_SubjectGradeSemesterId",
+                        column: x => x.SubjectGradeSemesterId,
+                        principalTable: "SubjectGradeSemesters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NormalGrades",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ExamId = table.Column<int>(type: "int", nullable: false),
+                    SubjectGradeSemesterId = table.Column<int>(type: "int", nullable: false),
                     Factor = table.Column<int>(type: "int", nullable: false),
                     Score = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NormalExams", x => x.Id);
+                    table.PrimaryKey("PK_NormalGrades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_NormalExams_Exams_ExamId",
-                        column: x => x.ExamId,
-                        principalTable: "Exams",
+                        name: "FK_NormalGrades_SubjectGradeSemesters_SubjectGradeSemesterId",
+                        column: x => x.SubjectGradeSemesterId,
+                        principalTable: "SubjectGradeSemesters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -215,24 +252,29 @@ namespace DTO_QLHT.Migrations
                 column: "HomeroomTeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exams_StudentId",
-                table: "Exams",
+                name: "IX_ClassroomStudent_StudentsId",
+                table: "ClassroomStudent",
+                column: "StudentsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NormalGrades_SubjectGradeSemesterId",
+                table: "NormalGrades",
+                column: "SubjectGradeSemesterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubjectGrades_StudentId",
+                table: "SubjectGrades",
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exams_TeachId",
-                table: "Exams",
+                name: "IX_SubjectGrades_TeachId",
+                table: "SubjectGrades",
                 column: "TeachId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NormalExams_ExamId",
-                table: "NormalExams",
-                column: "ExamId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Students_ClassroomId",
-                table: "Students",
-                column: "ClassroomId");
+                name: "IX_SubjectGradeSemesters_SubjectGradeId",
+                table: "SubjectGradeSemesters",
+                column: "SubjectGradeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teachers_UserId",
@@ -258,13 +300,19 @@ namespace DTO_QLHT.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FinalExams");
+                name: "ClassroomStudent");
 
             migrationBuilder.DropTable(
-                name: "NormalExams");
+                name: "FinalGrades");
 
             migrationBuilder.DropTable(
-                name: "Exams");
+                name: "NormalGrades");
+
+            migrationBuilder.DropTable(
+                name: "SubjectGradeSemesters");
+
+            migrationBuilder.DropTable(
+                name: "SubjectGrades");
 
             migrationBuilder.DropTable(
                 name: "Students");

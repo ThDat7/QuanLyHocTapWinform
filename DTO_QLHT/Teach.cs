@@ -8,7 +8,6 @@ public class Teach
     public int Id { get; set; }
 
     //[Required]
-    public SemesterEnum Semester { get; set; }
 
     [ForeignKey("Teacher")]
     [Required]
@@ -24,10 +23,6 @@ public class Teach
     [Required]
     public int ClassroomId { get; set; }
     public virtual Classroom Classroom { get; set; }
-}
-
-public enum SemesterEnum
-{
-    I = 1,
-    II = 2
+    //public virtual ICollection<SubjectGrade> SubjectGrade { get; set; }
+    public virtual List<SubjectGrade> SubjectGrade { get; set; }
 }

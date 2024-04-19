@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-public class Exam
+public class SubjectGrade
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Key]
@@ -18,6 +18,6 @@ public class Exam
     public int TeachId { get; set; }
     public virtual Teach Teach { get; set; }
 
-    public virtual ICollection<NormalExam> NormalExams { get; set; }
-    public virtual FinalExam FinalExam { get; set; }
+    //public virtual ICollection<SubjectGradeSemester>? SubjectGradeSemesters { get; set; }
+    public virtual List<SubjectGradeSemester>? SubjectGradeSemesters { get; set; }
 }

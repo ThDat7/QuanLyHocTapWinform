@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class FinalExam
+public class FinalGrade
 {
     [Key]
-    [ForeignKey("Exam")]
-    public int ExamId { get; set; }
-    public virtual Exam Exam { get; set; }
+    [ForeignKey("SubjectGradeSemester")]
+    public int SubjectGradeSemesterId { get; set; }
+    public virtual SubjectGradeSemester SubjectGradeSemester { get; set; }
 
     //[Required]
     public float Score { get; set; }
