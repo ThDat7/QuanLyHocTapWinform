@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -31,7 +32,10 @@ public class Classroom
 
 public enum GradeEnum
 {
+    [Description("10")]
     TENTH = 10,
+    [Description("11")]
     ELEVENTH = 11,
+    [Description("12")]
     TWELVETH = 12
 }

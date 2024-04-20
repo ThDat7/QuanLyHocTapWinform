@@ -1,4 +1,5 @@
-﻿using DTO_QLHT;
+﻿using BUS_QLHT;
+using DTO_QLHT;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -39,7 +40,7 @@ namespace GUI_QLHT
                 context.Teachers.Add(new Teacher() { 
                     User = new User() 
                     { 
-                        Username = "teacher" + i, Password = "123", Role = RoleEnum.TEACHER,
+                        Username = "teacher" + i, Password = UserService.HashPassword("123"), Role = RoleEnum.TEACHER,
                         FirstName = ""+ i,
                         LastName = "last " + i
                     } 
@@ -55,7 +56,7 @@ namespace GUI_QLHT
                 context.Users.Add( new User()
                     {
                         Username = "staff" + i,
-                        Password = "123",
+                        Password = UserService.HashPassword("123"),
                         Role = RoleEnum.STAFF,
                         FirstName = "" + i,
                         LastName = "last " + i
@@ -71,7 +72,7 @@ namespace GUI_QLHT
                 context.Users.Add(new User()
                 {
                     Username = "admin" + i,
-                    Password = "123",
+                    Password = UserService.HashPassword("123"),
                     Role = RoleEnum.ADMIN,
                     FirstName = "" + i,
                     LastName = "last " + i

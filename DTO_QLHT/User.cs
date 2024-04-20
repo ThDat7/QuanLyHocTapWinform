@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,7 +15,7 @@ public class User
     public string Username { get; set; }
 
     [Required]
-    [StringLength(50)]
+    [StringLength(150)]
     public string Password { get; set; }
 
     //[Required]
@@ -55,7 +56,10 @@ public class User
 
 public enum RoleEnum
 {
+    [Description("Quản trị viên")]
     ADMIN,
+    [Description("Giáo vụ")]
     STAFF,
+    [Description("Giáo viên")]
     TEACHER
 }

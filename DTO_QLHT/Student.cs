@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -36,6 +37,8 @@ public class Student
 
 public enum SexEnum
 {
+    [Description("Nữ")]
     Female,
+    [Description("Nam")]
     Male
 }

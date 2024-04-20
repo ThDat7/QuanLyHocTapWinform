@@ -35,6 +35,7 @@
             // 
             // btnLogin
             // 
+            
             btnLogin.Location = new Point(325, 261);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(112, 34);
@@ -47,6 +48,7 @@
             // 
             txbPassword.Location = new Point(325, 206);
             txbPassword.Name = "txbPassword";
+            txbPassword.PasswordChar = '*';
             txbPassword.Size = new Size(150, 31);
             txbPassword.TabIndex = 4;
             // 
@@ -69,6 +71,11 @@
             Text = "fLogin";
             ResumeLayout(false);
             PerformLayout();
+
+
+
+            this.ActiveControl = txbUsername;
+            this.AcceptButton = btnLogin;
         }
 
         #endregion

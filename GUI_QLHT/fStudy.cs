@@ -30,7 +30,7 @@ namespace GUI_QLHT
 
         private void LoadTeach()
         {
-            List<Object> teaches = teachService.GetTeachesByUserId(31);
+            List<Object> teaches = teachService.GetTeachesByUserId(3);
             teachList.DataSource = teaches;
         }
 

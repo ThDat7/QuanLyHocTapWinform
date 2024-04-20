@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -22,6 +23,8 @@ public class NormalGrade
 
 public enum FactorEnum
 {
+    [Description("1")]
     I = 1,
+    [Description("2")]
     II = 2
 }

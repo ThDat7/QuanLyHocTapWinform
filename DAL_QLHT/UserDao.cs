@@ -1,4 +1,4 @@
-﻿using DTO_QLHT;
+﻿    using DTO_QLHT;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,12 +15,12 @@ namespace DAL_QLHT
         {
         }
 
-        public User Login(string username, string password)
+        public User GetByUsername(String username)
         {
-            var query = from u in db.Users
-                        where u.Username == username && u.Password == password
-                        select u;
-            return (User) query;
+            using (db = new student_managementContext())
+            {
+                return db.Users.Where(u => u.Username.Equals(username)).First<User>();
+            }
         }
 
         public List<User> GetUserByRole(RoleEnum role)
