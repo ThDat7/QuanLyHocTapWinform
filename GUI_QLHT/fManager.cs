@@ -154,6 +154,7 @@ namespace GUI_QLHT
             return subject;
         }
 
+
         private void LoadSubject()
         {
             String gradeText = cbSubjectGrade.Text;

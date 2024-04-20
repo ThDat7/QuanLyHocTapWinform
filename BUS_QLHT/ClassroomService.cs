@@ -38,5 +38,30 @@ namespace BUS_QLHT
         {
             return classroomDao.DeleteClassroom(id);
         }
+
+        public Object GetHomeroomTeacher(int id)
+        {
+            return classroomDao.GetHomeroomTeacher(id);
+        }
+
+        public List<Object> GetSubjetTeachers(int id)
+        {
+            return classroomDao.GetSubjetTeachers(id);
+        }
+
+        public Boolean AddStudentToClass(int classId, int studentId)
+        {
+            return classroomDao.AddStudentToClass(classId, studentId);
+        }
+
+        public Boolean RemoveStudentInClass(int classId, int studentId)
+        {
+            return classroomDao.RemoveStudentInClass(classId, studentId);
+        }
+
+        public Boolean SetHomeroomTeacher(int classId, int teacherId)
+        {
+            return classroomDao.SetHomeroomTeacher(classId, teacherId);
+        }
     }
 }

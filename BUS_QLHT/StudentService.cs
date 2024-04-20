@@ -29,5 +29,15 @@ namespace BUS_QLHT
         {
             return studentDao.DeleteStudent(id);
         }
+
+        public List<Object> GetInClass(int classroomId)
+        {
+            return studentDao.GetInClass(classroomId);
+        }
+
+        public List<Object> Search(string keyword, List<int> excludeIds)
+        {
+            return studentDao.Search(keyword, excludeIds);
+        }
     }
 }

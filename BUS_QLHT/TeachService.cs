@@ -26,5 +26,10 @@ namespace BUS_QLHT
         {
             return teachDao.UpdateTeach(teach);
         }
+
+        public Boolean AddTeach(int classroomId, int teacherId, int subjectId)
+        {
+            return teachDao.AddTeach(classroomId, teacherId, subjectId);
+        }
     }
 }

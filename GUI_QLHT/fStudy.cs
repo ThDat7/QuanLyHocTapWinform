@@ -25,18 +25,18 @@ namespace GUI_QLHT
         void LoadData()
         {
             dtgvTeach.DataSource = teachList;
-            LoadTeach();
-        }
 
-        private void LoadTeach()
-        {
             List<Object> teaches = teachService.GetTeachesByUserId(3);
             teachList.DataSource = teaches;
         }
 
         private void btnEditExam_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            int selectedId = int.Parse(dtgvTeach.CurrentRow.Cells[0].Value.ToString());
+            fExam fexam = new fExam(selectedId);
+            fexam.ShowDialog();
+            this.Show();
         }
     }
 }

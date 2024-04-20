@@ -19,10 +19,10 @@ namespace GUI_QLHT
         TeachService teachService = new TeachService();
         private Teach teach;
 
-        public fExam()
+        public fExam(int teachId)
         {
             InitializeComponent();
-            LoadData();
+            LoadData(teachId);
 
             InitTabPage(dtgvTeach1, SemesterEnum.I);
             InitTabPage(dtgvTeach2, SemesterEnum.II);
@@ -140,7 +140,7 @@ namespace GUI_QLHT
             }
         }
 
-        public void LoadData()
+        public void LoadData(int teachId)
         {
             teach = (Teach)teachService.GetExamByTeachId(2);
         }

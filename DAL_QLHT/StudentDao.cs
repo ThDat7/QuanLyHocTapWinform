@@ -1,4 +1,5 @@
 ﻿using DTO_QLHT;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,43 @@ namespace DAL_QLHT
             {
                 db.Students.Remove(new Student() { Id = id });
                 return db.SaveChanges() > 0;
+            }
+        }
+
+        public List<Object> GetInClass(int classroomId)
+        {
+            using (db = new student_managementContext())
+            {
+                var query = db.Students
+                    .Where(s => s.Classrooms.Any(c => c.Id == classroomId))
+                    .Select(s => new
+                    {
+                        s.Id,
+                        name = $"{s.LastName} {s.FirstName}",
+                        s.Dob,
+                        s.Address
+                    });
+
+                return query.ToList<Object>();
+            }
+        }
+
+        public List<Object> Search(string keyword, List<int> excludeIds)
+        {
+            using(db = new student_managementContext())
+            {
+                var query = db.Students
+                            .Where(s => (s.LastName+" "+s.FirstName)
+                                            .Contains(keyword)
+                                        && !excludeIds.Contains(s.Id))
+                            .Select(s => new
+                            {
+                                s.Id,
+                                name = $"{s.LastName} {s.FirstName}",
+                                s.Dob,
+                                s.Address
+                            });
+                return query.ToList<Object>();
             }
         }
     }

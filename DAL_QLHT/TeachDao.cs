@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,9 +24,10 @@ namespace DAL_QLHT
                             join teacher in db.Teachers on teach.TeacherId equals teacher.Id
                             join classroom in db.Classrooms on teach.ClassroomId equals classroom.Id
                             join subject in db.Subjects on teach.SubjectId equals subject.Id
-                            where teacher.UserId == userId
+                            //where teacher.UserId == userId
                             select new
                             {
+                                TeachId = teach.Id,
                                 classroom.Year,
                                 classroom.Grade,
                                 classroom.Order,
@@ -54,6 +56,16 @@ namespace DAL_QLHT
         {
             tracked_db.Update(teach);
             return tracked_db.SaveChanges() > 0;
+        }
+
+        public Boolean AddTeach(int classroomId, int teacherId, int subjectId)
+        {
+            using(db = new student_managementContext())
+            {
+                Teach t = new Teach() { ClassroomId = classroomId, TeacherId = teacherId, SubjectId = subjectId };
+                db.Teaches.Add(t);
+                return db.SaveChanges() > 0;
+            }
         }
     }
 }
