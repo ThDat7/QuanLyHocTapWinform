@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,14 +25,6 @@ namespace GUI_QLHT
             FakeSubject();
             FakeTeach();
             FakeSubjectGrade();
-
-            //SubjectGradeSemester subject = context.SubjectGradeSemesters.Include("NormalGrades").Where(sg => sg.Id == 39).FirstOrDefault<SubjectGradeSemester>();
-
-            //subject.NormalGrades.RemoveAt(2);
-
-            //context.Update(subject);
-            //context.SaveChanges();
-
 
         }
 
@@ -160,14 +154,17 @@ namespace GUI_QLHT
 
             foreach (var classroom in classrooms)
             {
-                var randomSubject = subjects[random.Next(subjects.Count)];
-
-                context.Teaches.Add(new Teach()
+                for (int i = 0; i < 3; i++)
                 {
-                    TeacherId = teachers[random.Next(teachers.Count)].Id,
-                    SubjectId = randomSubject.Id,
-                    ClassroomId = classroom.Id
-                });
+                    var randomSubject = subjects[random.Next(subjects.Count)];
+
+                    context.Teaches.Add(new Teach()
+                    {
+                        TeacherId = teachers[random.Next(teachers.Count)].Id,
+                        SubjectId = randomSubject.Id,
+                        ClassroomId = classroom.Id
+                    });
+                }
             }
 
             context.SaveChanges();
@@ -227,7 +224,6 @@ namespace GUI_QLHT
                         };
                         context.SubjectGradeSemesters.Add(subjectGradeSemester);
 
-                        // Tạo dữ liệu cho NormalExams và FinalExam
                         FakeNormalExams(subjectGradeSemester);
                         FakeFinalExam(subjectGradeSemester);
                     }
@@ -236,57 +232,5 @@ namespace GUI_QLHT
 
             context.SaveChanges();
         }
-
-
-        //public void ManualFakeSubjectGrade()
-        //{
-        //    //var teach = context.Teaches.ToList();
-        //    //var student = context.Students.ToList();
-
-        //    //SubjectGrade subjectGrade = new SubjectGrade()
-        //    //{
-        //    //    Student = student[0],
-        //    //    Teach = teach[0],
-        //    //};
-        //    //context.SubjectGrades.Add(subjectGrade);
-
-        //    //SubjectGrade subjectGrade1 = new SubjectGrade()
-        //    //{
-        //    //    Student = student[1],
-        //    //    Teach = teach[0],
-        //    //};
-        //    //context.SubjectGrades.Add(subjectGrade1);
-
-        //    //SubjectGrade subjectGrade2 = new SubjectGrade()
-        //    //{
-        //    //    Student = student[2],
-        //    //    Teach = teach[0],
-        //    //};
-        //    //context.SubjectGrades.Add(subjectGrade2);
-
-        //    //SubjectGrade subjectGrade3 = new SubjectGrade()
-        //    //{
-        //    //    Student = student[3],
-        //    //    Teach = teach[0],
-        //    //};
-        //    //context.SubjectGrades.Add(subjectGrade3);
-
-        //    //context.SaveChanges();
-
-        //    var teach = context.Teaches.ToList();
-        //    var students = context.Students.ToList();
-
-        //    foreach (var student in students)
-        //    {
-        //        var subjectGrade = new SubjectGrade()
-        //        {
-        //            Student = student,
-        //            Teach = teach[0], // Đối tượng Teach không thay đổi
-        //        };
-        //        context.SubjectGrades.Add(subjectGrade);
-        //    }
-
-        //    context.SaveChanges();
-        //}
     }
 }

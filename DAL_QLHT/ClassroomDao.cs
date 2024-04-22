@@ -38,9 +38,13 @@ namespace DAL_QLHT
         {
             using (db = new student_managementContext())
             {
-                var query = from c in db.Classrooms
-                             group c by c.Year into yearGroup
-                             select yearGroup.Key;
+                //var query = from c in db.Classrooms
+                //             group c by c.Year into yearGroup
+                //             select yearGroup.Key;
+                var query = db.Classrooms
+                            .Select(c => c.Year)
+                            .Distinct()
+                            .OrderByDescending(y => y);
                 return query.ToList<int>();
             }
         }
@@ -102,12 +106,11 @@ namespace DAL_QLHT
                             select new
                             {
                                 Id = teacher.Id,
+                                SubjectName = subject.Name,
                                 Name = $"{teacher.User.LastName} {teacher.User.FirstName}",
                                 Dob = teacher.User.Dob,
-                                Address = teacher.User.Address,
-                                SubjectName = subject.Name
+                                Address = teacher.User.Address
                             };
-
                 return query.ToList<Object>();
             }
         }
@@ -157,6 +160,17 @@ namespace DAL_QLHT
                             $"WHERE Id={classId}";
                 int rowEffected = db.Database.ExecuteSqlRaw(sql);
                 return rowEffected > 0;
+            }
+        }
+
+        public GradeEnum GetGradeById(int classId)
+        {
+            using (var db = new student_managementContext())
+            {
+                var query = db.Classrooms
+                            .Where(c => c.Id == classId)
+                            .Select(c => c.Grade);
+                return query.FirstOrDefault<GradeEnum>();
             }
         }
 

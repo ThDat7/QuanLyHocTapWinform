@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DTO_QLHT.Migrations
 {
     [DbContext(typeof(student_managementContext))]
-    [Migration("20240420154410_1")]
+    [Migration("20240422065317_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,7 +71,7 @@ namespace DTO_QLHT.Migrations
                     b.Property<int>("SubjectGradeSemesterId")
                         .HasColumnType("int");
 
-                    b.Property<float>("Score")
+                    b.Property<float?>("Score")
                         .HasColumnType("real");
 
                     b.HasKey("SubjectGradeSemesterId");
@@ -90,7 +90,7 @@ namespace DTO_QLHT.Migrations
                     b.Property<int>("Factor")
                         .HasColumnType("int");
 
-                    b.Property<float>("Score")
+                    b.Property<float?>("Score")
                         .HasColumnType("real");
 
                     b.Property<int>("SubjectGradeSemesterId")

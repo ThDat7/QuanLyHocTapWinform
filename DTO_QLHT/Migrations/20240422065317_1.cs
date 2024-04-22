@@ -212,7 +212,7 @@ namespace DTO_QLHT.Migrations
                 columns: table => new
                 {
                     SubjectGradeSemesterId = table.Column<int>(type: "int", nullable: false),
-                    Score = table.Column<float>(type: "real", nullable: false)
+                    Score = table.Column<float>(type: "real", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -233,7 +233,7 @@ namespace DTO_QLHT.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SubjectGradeSemesterId = table.Column<int>(type: "int", nullable: false),
                     Factor = table.Column<int>(type: "int", nullable: false),
-                    Score = table.Column<float>(type: "real", nullable: false)
+                    Score = table.Column<float>(type: "real", nullable: true)
                 },
                 constraints: table =>
                 {

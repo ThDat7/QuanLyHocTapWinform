@@ -11,5 +11,5 @@ public class FinalGrade
     public virtual SubjectGradeSemester SubjectGradeSemester { get; set; }
 
     //[Required]
-    public float Score { get; set; }
+    public float? Score { get; set; }
 }

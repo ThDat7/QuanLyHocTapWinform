@@ -14,19 +14,14 @@ namespace DAL_QLHT
         {
         }
 
-        public List<Object> GetSubjectByGrade(GradeEnum grade)
+        public List<Subject> GetSubjectByGrade(GradeEnum grade)
         {
             using (db = new student_managementContext())
             {
-                var query = from s in db.Subjects
-                            where s.Grade == grade
-                            select new
-                            {
-                                s.Id,
-                                s.Name,
-                                s.Grade
-                            };
-                return query.ToList<Object>();
+                var query = db.Subjects
+                            .Where(s => s.Grade == grade)
+                            .Select(s => s);
+                return query.ToList<Subject>();
             }
         }
 

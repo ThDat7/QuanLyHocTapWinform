@@ -69,7 +69,7 @@ namespace DTO_QLHT.Migrations
                     b.Property<int>("SubjectGradeSemesterId")
                         .HasColumnType("int");
 
-                    b.Property<float>("Score")
+                    b.Property<float?>("Score")
                         .HasColumnType("real");
 
                     b.HasKey("SubjectGradeSemesterId");
@@ -88,7 +88,7 @@ namespace DTO_QLHT.Migrations
                     b.Property<int>("Factor")
                         .HasColumnType("int");
 
-                    b.Property<float>("Score")
+                    b.Property<float?>("Score")
                         .HasColumnType("real");
 
                     b.Property<int>("SubjectGradeSemesterId")

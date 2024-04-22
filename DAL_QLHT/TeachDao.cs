@@ -46,7 +46,7 @@ namespace DAL_QLHT
                         .Include("SubjectGrade.SubjectGradeSemesters")
                         .Include("SubjectGrade.SubjectGradeSemesters.NormalGrades")
                         .Include("SubjectGrade.SubjectGradeSemesters.FinalGrade")
-                        where teach.Id == 2
+                        where teach.Id == teachId
                         select teach;
 
             return query.First<Teach>();
@@ -58,13 +58,25 @@ namespace DAL_QLHT
             return tracked_db.SaveChanges() > 0;
         }
 
-        public Boolean AddTeach(int classroomId, int teacherId, int subjectId)
+        public int AddTeach(int classroomId, int teacherId, int subjectId)
         {
             using(db = new student_managementContext())
             {
                 Teach t = new Teach() { ClassroomId = classroomId, TeacherId = teacherId, SubjectId = subjectId };
                 db.Teaches.Add(t);
-                return db.SaveChanges() > 0;
+                db.SaveChanges();
+                return t.Id;
+            }
+        }
+
+        public Boolean RemoveTeach(int teachId)
+        {
+            using (db = new student_managementContext())
+            {
+                string sql = $"DELETE FROM Teaches " +
+                            $"WHERE Id={teachId}";
+                int rowEffected = db.Database.ExecuteSqlRaw(sql);
+                return rowEffected > 0;
             }
         }
     }

@@ -18,7 +18,7 @@ public class NormalGrade
     public FactorEnum Factor { get; set; }
 
     //[Required]
-    public float Score { get; set; }
+    public float? Score { get; set; }
 }
 
 public enum FactorEnum

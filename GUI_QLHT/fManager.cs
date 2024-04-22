@@ -165,7 +165,7 @@ namespace GUI_QLHT
                 grade = GradeEnum.ELEVENTH;
             else if (gradeText == "12")
                 grade = GradeEnum.TWELVETH;
-            List<Object> subjects = subjectService.GetSubjectByGrade(grade);
+            List<Subject> subjects = subjectService.GetSubjectByGrade(grade);
             subjectList.DataSource = subjects;
         }
 

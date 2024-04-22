@@ -1,0 +1,59 @@
+﻿USE student_management
+GO
+CREATE PROCEDURE GetStudentGrades
+	@ClassroomId INT,
+    @Semester INT
+AS
+BEGIN
+
+DECLARE @subjectName NVARCHAR(MAX);
+DECLARE @query NVARCHAR(MAX);
+
+SELECT @subjectName = COALESCE(@subjectName + ', ', '') + CONCAT(s.Name, '_', s.Id)
+FROM Classrooms c
+JOIN Teaches t on t.ClassroomId=c.Id
+JOIN Subjects s on t.SubjectId=s.Id
+WHERE c.Id= @ClassroomId;
+
+SET @query = '
+SELECT *
+FROM (
+    SELECT
+        s.Lastname,
+        s.FirstName,
+        CONCAT(sj.Name, ''_'', sj.Id) AS SubjectNameWithId,
+        ROUND((CASE 
+            WHEN COUNT(ng.Score) = COUNT(*) THEN SUM(ng.Score * ng.Factor)
+            ELSE NULL
+        END + MAX(fg.Score) * 3) / (SUM(ng.Factor) + 3), 2) AS CalculatedGrade
+    FROM 
+        Students s
+    INNER JOIN 
+        ClassroomStudent cs ON s.Id = cs.StudentsId
+    INNER JOIN 
+        Classrooms c ON c.Id = cs.ClassroomsId
+    INNER JOIN 
+        Teaches t ON c.Id = t.ClassroomId
+    INNER JOIN 
+        Subjects sj ON t.SubjectId = sj.Id
+    FULL JOIN 
+        SubjectGrades sg ON t.Id = sg.TeachId AND sg.StudentId = s.Id
+    FULL JOIN 
+        SubjectGradeSemesters sgs ON sg.Id = sgs.SubjectGradeId AND sgs.Semester = '+ CAST(@Semester AS NVARCHAR(MAX)) +'
+    FULL JOIN 
+        NormalGrades ng ON sgs.Id = ng.SubjectGradeSemesterId
+    FULL JOIN 
+        FinalGrades fg ON sgs.Id = fg.SubjectGradeSemesterId
+    WHERE 
+        c.Id = '+ CAST(@ClassroomId AS NVARCHAR(MAX)) +'
+    GROUP BY 
+        s.Id, s.Lastname, s.FirstName, sj.Name, sj.Id
+) AS src
+PIVOT (
+    MAX(CalculatedGrade)
+    FOR SubjectNameWithId IN (' + @subjectName + ')
+) AS pvt';
+
+EXECUTE(@query);
+
+END

@@ -239,67 +239,67 @@ namespace GUI_QLHT
             get { return subjectGrade.Student.LastName + " " + subjectGrade.Student.FirstName; }
         }
 
-        public float Semester1NormalGrade15p1
+        public float? Semester1NormalGrade15p1
         {
             get { return GetNormalGrade(SemesterEnum.I, FactorEnum.I, 1); }
             set { SetNormalGrade(value, SemesterEnum.I, FactorEnum.I, 1); }
         }
 
-        public float Semester1NormalGrade45p1
+        public float? Semester1NormalGrade45p1
         {
             get { return GetNormalGrade(SemesterEnum.I, FactorEnum.II, 1); }
             set { SetNormalGrade(value, SemesterEnum.I, FactorEnum.II, 1); }
         }
 
-        public float Semester1NormalGrade15p2
+        public float? Semester1NormalGrade15p2
         {
             get { return GetNormalGrade(SemesterEnum.I, FactorEnum.I, 2); }
             set { SetNormalGrade(value, SemesterEnum.I, FactorEnum.I, 2); }
         }
 
-        public float Semester1NormalGrade45p2
+        public float? Semester1NormalGrade45p2
         {
             get { return GetNormalGrade(SemesterEnum.I, FactorEnum.II, 2); }
             set { SetNormalGrade(value, SemesterEnum.I, FactorEnum.II, 2); }
         }
 
-        public float Semester2NormalGrade15p1
+        public float? Semester2NormalGrade15p1
         {
             get { return GetNormalGrade(SemesterEnum.II, FactorEnum.I, 1); }
             set { SetNormalGrade(value, SemesterEnum.II, FactorEnum.I, 1); }
         }
 
-        public float Semester2NormalGrade45p1
+        public float? Semester2NormalGrade45p1
         {
             get { return GetNormalGrade(SemesterEnum.II, FactorEnum.II, 1); }
             set { SetNormalGrade(value, SemesterEnum.II, FactorEnum.II, 1); }
         }
 
-        public float Semester2NormalGrade15p2
+        public float? Semester2NormalGrade15p2
         {
             get { return GetNormalGrade(SemesterEnum.II, FactorEnum.I, 2); }
             set { SetNormalGrade(value, SemesterEnum.II, FactorEnum.I, 2); }
         }
 
-        public float Semester2NormalGrade45p2
+        public float? Semester2NormalGrade45p2
         {
             get { return GetNormalGrade(SemesterEnum.II, FactorEnum.II, 2); }
             set { SetNormalGrade(value, SemesterEnum.II, FactorEnum.II, 2); }
         }
 
-        public float Semester1FinalGrade
+        public float? Semester1FinalGrade
         {
             get { return GetFinalGrade(SemesterEnum.I); }
             set { SetFinalGrade(value, SemesterEnum.I); }
         }
 
-        public float Semester2FinalGrade
+        public float? Semester2FinalGrade
         {
             get { return GetFinalGrade(SemesterEnum.II); }
             set { SetFinalGrade(value, SemesterEnum.II); }
         }
 
-        private float GetNormalGrade(SemesterEnum semester, FactorEnum factor, int order)
+        private float? GetNormalGrade(SemesterEnum semester, FactorEnum factor, int order)
         {
             return subjectGrade
                 .SubjectGradeSemesters
@@ -310,7 +310,7 @@ namespace GUI_QLHT
                 .ToList<NormalGrade>()[order - 1].Score;
         }
 
-        private void SetNormalGrade(float value, SemesterEnum semester, FactorEnum factor, int order)
+        private void SetNormalGrade(float? value, SemesterEnum semester, FactorEnum factor, int order)
         {
             subjectGrade
                 .SubjectGradeSemesters
@@ -321,7 +321,7 @@ namespace GUI_QLHT
                 .ToList<NormalGrade>()[order - 1].Score = value;
         }
 
-        private float GetFinalGrade(SemesterEnum semester)
+        private float? GetFinalGrade(SemesterEnum semester)
         {
             return subjectGrade
                 .SubjectGradeSemesters
@@ -330,7 +330,7 @@ namespace GUI_QLHT
             .FinalGrade.Score;
         }
 
-        private void SetFinalGrade(float value, SemesterEnum semester)
+        private void SetFinalGrade(float? value, SemesterEnum semester)
         {
             subjectGrade
                 .SubjectGradeSemesters

@@ -20,6 +20,7 @@ namespace GUI_QLHT
         private StudentService studentService = new StudentService();
         private TeacherService teacherService = new TeacherService();
         private TeachService teachService = new TeachService();
+        private SubjectService subjectService = new SubjectService();
 
         BindingSource studentInClassBinding = new BindingSource();
         BindingSource homeroomTeacherBinding = new BindingSource();
@@ -27,6 +28,7 @@ namespace GUI_QLHT
         BindingSource searchStudentsBinding = new BindingSource();
         BindingSource searchHomeroomTeachersBinding = new BindingSource();
         BindingSource searchSubjectTeachersBinding = new BindingSource();
+        List<Subject> subjects;
 
         //private List<Object> studentInClass;
         //private Object homeroomTeacher;
@@ -62,11 +64,24 @@ namespace GUI_QLHT
             homeroomTeacherBinding.DataSource = classroomService.GetHomeroomTeacher(classroomId);
             subjectTeachersBinding.DataSource = classroomService.GetSubjetTeachers(classroomId);
 
+            LoadSubjects();
+
             if (homeroomTeacherBinding.DataSource != null)
             {
                 txbHomeroomName.DataBindings.Add(new Binding("Text", homeroomTeacherBinding.DataSource, "Name", true, DataSourceUpdateMode.Never));
                 txbHomeroomDob.DataBindings.Add(new Binding("Text", homeroomTeacherBinding.DataSource, "Dob", true, DataSourceUpdateMode.Never));
                 txbHomeroomAddress.DataBindings.Add(new Binding("Text", homeroomTeacherBinding.DataSource, "Address", true, DataSourceUpdateMode.Never));
+            }
+        }
+
+        private void LoadSubjects()
+        {
+            GradeEnum grade = classroomService.GetGradeById(classroomId);
+            cbSubject.Items.Clear();
+            subjects = subjectService.GetSubjectByGrade(grade);
+            foreach (Subject sj in subjects)
+            {
+                cbSubject.Items.Add(sj.Name);
             }
         }
 
@@ -115,16 +130,20 @@ namespace GUI_QLHT
         private void btnAddTeacher_Click(object sender, EventArgs e)
         {
             int idAdd = GetFirstCellSelectedRow(dtgvSearchTeacher2);
-            teachService.AddTeach(classroomId, idAdd, 3);
+
+            int subjectSelectedIndex = cbSubject.SelectedIndex;
+            Subject selectedSubject = subjects[subjectSelectedIndex];
+
+            int id = teachService.AddTeach(classroomId, idAdd, selectedSubject.Id);
 
             DataGridViewRow teacherRow = dtgvSearchTeacher2.CurrentRow;
             Object subjectTeacher = new
             {
-                Id = int.Parse(teacherRow.Cells[0].Value.ToString()),
-                Name = teacherRow.Cells[1].Value.ToString(),
-                Dob = teacherRow.Cells[2].Value.ToString(),
-                Address = teacherRow.Cells[3].Value.ToString(),
-                SubjectName = ""
+                Id = id,
+                SubjectName = selectedSubject.Name,
+                Name = teacherRow.Cells[1].Value?.ToString(),
+                Dob = teacherRow.Cells[2].Value?.ToString(),
+                Address = teacherRow.Cells[3].Value?.ToString()
             };
 
             subjectTeachersBinding.Add(subjectTeacher);
@@ -133,7 +152,10 @@ namespace GUI_QLHT
 
         private void btnRemoveTeacher_Click(object sender, EventArgs e)
         {
-            int idRemove = GetFirstCellSelectedRow(dtgvSearchTeacher2);
+            int idRemove = GetFirstCellSelectedRow(dtgvSubjectTeachers);
+            teachService.RemoveTeach(idRemove);
+            Object subjetTeacher = dtgvSubjectTeachers.CurrentRow.DataBoundItem;
+            subjectTeachersBinding.Remove(subjetTeacher);
         }
 
         private void btnSetHomeroom_Click(object sender, EventArgs e)

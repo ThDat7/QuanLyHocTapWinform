@@ -63,5 +63,10 @@ namespace BUS_QLHT
         {
             return classroomDao.SetHomeroomTeacher(classId, teacherId);
         }
+
+        public GradeEnum GetGradeById(int classId) 
+        {
+            return classroomDao.GetGradeById(classId);
+        }
     }
 }
