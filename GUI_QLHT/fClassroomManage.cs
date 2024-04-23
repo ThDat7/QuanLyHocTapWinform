@@ -16,6 +16,7 @@ namespace GUI_QLHT
     public partial class fClassroomManage : Form
     {
         private int classroomId;
+        private Classroom classroom;
         private ClassroomService classroomService = new ClassroomService();
         private StudentService studentService = new StudentService();
         private TeacherService teacherService = new TeacherService();
@@ -60,6 +61,7 @@ namespace GUI_QLHT
 
         private void LoadData()
         {
+            classroom = classroomService.GetById(classroomId);
             studentInClassBinding.DataSource = studentService.GetInClass(classroomId);
             homeroomTeacherBinding.DataSource = classroomService.GetHomeroomTeacher(classroomId);
             subjectTeachersBinding.DataSource = classroomService.GetSubjetTeachers(classroomId);
@@ -72,11 +74,16 @@ namespace GUI_QLHT
                 txbHomeroomDob.DataBindings.Add(new Binding("Text", homeroomTeacherBinding.DataSource, "Dob", true, DataSourceUpdateMode.Never));
                 txbHomeroomAddress.DataBindings.Add(new Binding("Text", homeroomTeacherBinding.DataSource, "Address", true, DataSourceUpdateMode.Never));
             }
+
+            if (classroom.IsLock == false)
+                btnLockClassroom.Text = "Khóa nhập điểm";
+            else
+                btnLockClassroom.Text = "Mở khóa nhập điểm";
         }
 
         private void LoadSubjects()
         {
-            GradeEnum grade = classroomService.GetGradeById(classroomId);
+            GradeEnum grade = classroom.Grade;
             cbSubject.Items.Clear();
             subjects = subjectService.GetSubjectByGrade(grade);
             foreach (Subject sj in subjects)
@@ -168,6 +175,14 @@ namespace GUI_QLHT
 
             homeroomTeacherBinding.DataSource = teacher;
 
+        }
+
+        private void btnLockClassroom_Click(object sender, EventArgs e)
+        {
+            bool status = classroomService.ChangeLockClassroom(classroomId);
+            if (status)
+                btnLockClassroom.Text = "Mở khóa nhập điểm";
+            else btnLockClassroom.Text = "Khóa nhập điểm";
         }
     }
 }

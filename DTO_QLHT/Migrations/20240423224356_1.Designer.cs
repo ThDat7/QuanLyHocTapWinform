@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DTO_QLHT.Migrations
 {
     [DbContext(typeof(student_managementContext))]
-    [Migration("20240423214627_1")]
+    [Migration("20240423224356_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,7 @@ namespace DTO_QLHT.Migrations
                     b.Property<bool?>("IsLock")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasDefaultValue(false);
 
                     b.Property<int>("Order")
                         .HasColumnType("int");

@@ -39,7 +39,7 @@ namespace DTO_QLHT.Migrations
                     b.Property<bool?>("IsLock")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasDefaultValue(false);
 
                     b.Property<int>("Order")
                         .HasColumnType("int");

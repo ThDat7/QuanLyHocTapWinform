@@ -68,5 +68,15 @@ namespace BUS_QLHT
         {
             return classroomDao.GetGradeById(classId);
         }
+
+        public Boolean ChangeLockClassroom(int classId)
+        {
+            return classroomDao.ChangeLockClassroom(classId);
+        }
+
+        public Classroom GetById(int classId)
+        {
+            return classroomDao.GetById(classId);
+        }
     }
 }

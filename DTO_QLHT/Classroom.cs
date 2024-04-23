@@ -19,7 +19,7 @@ public class Classroom
     //[Required]
     public int Year { get; set; }
 
-    [DefaultValue(true)]
+    [DefaultValue(false)]
     public bool? IsLock { get; set; }
 
     [ForeignKey("HomeroomTeacher")]

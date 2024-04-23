@@ -2,10 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace DAL_QLHT
 {
@@ -20,19 +22,19 @@ namespace DAL_QLHT
         {
             using (db = new student_managementContext())
             {
-                var query = from teach in db.Teaches
-                            join teacher in db.Teachers on teach.TeacherId equals teacher.Id
-                            join classroom in db.Classrooms on teach.ClassroomId equals classroom.Id
-                            join subject in db.Subjects on teach.SubjectId equals subject.Id
-                            //where teacher.UserId == userId
-                            select new
-                            {
-                                TeachId = teach.Id,
-                                classroom.Year,
-                                classroom.Grade,
-                                classroom.Order,
-                                subject.Name
-                            };
+                var query = db.Teaches
+                                .Include("Classroom.Students")
+                                .Include("Subject")
+                                .Where(t => t.Teacher.UserId == userId &&
+                                        t.Classroom.IsLock == false)
+                                .Select(t => new
+                                {
+                                    TeachId = t.Id,
+                                    t.Classroom.Year,
+                                    t.Classroom.Grade,
+                                    t.Classroom.Order,
+                                    t.Subject.Name
+                                });
                 return query.ToList<Object>();
             }
         }
@@ -54,6 +56,8 @@ namespace DAL_QLHT
 
         public Boolean UpdateTeach(Teach teach)
         {
+            if (teach.Classroom.IsLock == true) return false;
+
             tracked_db.Update(teach);
             return tracked_db.SaveChanges() > 0;
         }
@@ -98,8 +102,8 @@ namespace DAL_QLHT
                 .Include("Classroom.Students")
                 .FirstOrDefault();
 
-            if (t.Classroom.Students?.Count == 0)
-                return t;
+            if (t.Classroom.Students == null || t.Classroom.Students.Count == 0)
+                throw new Exception("Classroom with no students");
 
             t.SubjectGrade = new List<SubjectGrade>();
 

@@ -92,7 +92,7 @@ namespace DTO_QLHT.Migrations
                     Grade = table.Column<int>(type: "int", nullable: false),
                     Order = table.Column<int>(type: "int", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
-                    IsLock = table.Column<bool>(type: "bit", nullable: true, defaultValue: true),
+                    IsLock = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
                     HomeroomTeacherId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

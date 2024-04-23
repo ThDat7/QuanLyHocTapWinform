@@ -151,8 +151,8 @@ namespace GUI_QLHT
         {
             dtgv.AutoGenerateColumns = false;
             int semesterInt = semester == SemesterEnum.I ? 1 : 2;
-
-            List<StudyData> dtSource = teach.SubjectGrade.Select(sg => new StudyData(ref sg)).ToList<StudyData>();
+            List<StudyData> dtSource = teach.SubjectGrade?.Select(sg => new StudyData(ref sg)).ToList<StudyData>();
+            
             dtgv.DataSource = dtSource;
 
             dtgv.Columns.Add(new DataGridViewTextBoxColumn()

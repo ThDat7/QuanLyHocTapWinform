@@ -43,7 +43,7 @@ namespace DTO_QLHT
         {
             modelBuilder.Entity<Classroom>()
             .Property(c => c.IsLock)
-            .HasDefaultValue(true);
+            .HasDefaultValue(false);
             OnModelCreatingPartial(modelBuilder);
         }
 

@@ -174,5 +174,33 @@ namespace DAL_QLHT
             }
         }
 
+        public Boolean ChangeLockClassroom(int classId)
+        {
+            using (var db = new student_managementContext())
+            {
+                Classroom c = db.Classrooms
+                                .Where(c => c.Id == classId)
+                                .Select(c => c).FirstOrDefault();
+
+                c.IsLock = !c.IsLock;
+                db.Update(c);
+                db.SaveChanges();
+
+                if (c.IsLock == true) return true;
+                return false;
+            }
+        }
+
+        public Classroom GetById(int classId)
+        {
+            using (var db = new student_managementContext())
+            {
+                var query = db.Classrooms
+                                .Where(c => c.Id == classId)
+                                .Select(c => c);
+                return query.FirstOrDefault();
+            }
+        }
+
     }
 }
