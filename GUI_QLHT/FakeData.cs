@@ -149,7 +149,6 @@ namespace GUI_QLHT
         {
             var random = new Random();
             var teachers = context.Teachers.ToList();
-            var subjects = context.Subjects.ToList();
             var classrooms = context.Classrooms.ToList();
 
             foreach (var classroom in classrooms)
@@ -157,7 +156,10 @@ namespace GUI_QLHT
                 var usedSubjects = new HashSet<int>();
                 for (int i = 0; i < 3; i++)
                 {
-                    var availableSubjects = subjects.Where(s => !usedSubjects.Contains(s.Id)).ToList();
+                    var availableSubjects = context.Subjects
+                        .Where(s => !usedSubjects.Contains(s.Id) && s.Grade == classroom.Grade)
+                        .ToList();
+
                     if (availableSubjects.Any())
                     {
                         var randomSubject = availableSubjects[random.Next(availableSubjects.Count)];

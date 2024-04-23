@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+[Index(nameof(ClassroomId), nameof(SubjectId), IsUnique = true)]
 public class Teach
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

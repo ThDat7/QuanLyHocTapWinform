@@ -18,7 +18,7 @@ namespace GUI_QLHT
             ApplicationConfiguration.Initialize();
 
             FakeData fakeData = new FakeData();
-            //fakeData.CreateFakeData();
+            fakeData.CreateFakeData();
             Application.Run(new fStatsDetail(2));
         }
     }

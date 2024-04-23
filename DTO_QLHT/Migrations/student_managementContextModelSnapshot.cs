@@ -36,6 +36,11 @@ namespace DTO_QLHT.Migrations
                     b.Property<int?>("HomeroomTeacherId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsLock")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
@@ -220,11 +225,12 @@ namespace DTO_QLHT.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassroomId");
-
                     b.HasIndex("SubjectId");
 
                     b.HasIndex("TeacherId");
+
+                    b.HasIndex("ClassroomId", "SubjectId")
+                        .IsUnique();
 
                     b.ToTable("Teaches");
                 });
@@ -387,7 +393,7 @@ namespace DTO_QLHT.Migrations
                     b.HasOne("Teacher", "Teacher")
                         .WithMany("Teaches")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Classroom");

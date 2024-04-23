@@ -92,6 +92,7 @@ namespace DTO_QLHT.Migrations
                     Grade = table.Column<int>(type: "int", nullable: false),
                     Order = table.Column<int>(type: "int", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
+                    IsLock = table.Column<bool>(type: "bit", nullable: true, defaultValue: true),
                     HomeroomTeacherId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -158,7 +159,7 @@ namespace DTO_QLHT.Migrations
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -282,9 +283,10 @@ namespace DTO_QLHT.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teaches_ClassroomId",
+                name: "IX_Teaches_ClassroomId_SubjectId",
                 table: "Teaches",
-                column: "ClassroomId");
+                columns: new[] { "ClassroomId", "SubjectId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teaches_SubjectId",

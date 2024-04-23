@@ -39,22 +39,25 @@ namespace DTO_QLHT
             }
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    OnModelCreatingPartial(modelBuilder);
-        //}
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Teach>()
-                .HasOne(t => t.Teacher)
-                .WithMany(t => t.Teaches)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Thiết lập các ràng buộc ngoại khác tại đây
-
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Classroom>()
+            .Property(c => c.IsLock)
+            .HasDefaultValue(true);
+            OnModelCreatingPartial(modelBuilder);
         }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Teach>()
+        //        .HasOne(t => t.Teacher)
+        //        .WithMany(t => t.Teaches)
+        //        .OnDelete(DeleteBehavior.Restrict);
+
+        //    // Thiết lập các ràng buộc ngoại khác tại đây
+
+        //    base.OnModelCreating(modelBuilder);
+        //}
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DTO_QLHT.Migrations
 {
     [DbContext(typeof(student_managementContext))]
-    [Migration("20240422065317_1")]
+    [Migration("20240423214627_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,11 @@ namespace DTO_QLHT.Migrations
 
                     b.Property<int?>("HomeroomTeacherId")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("IsLock")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<int>("Order")
                         .HasColumnType("int");
@@ -222,11 +227,12 @@ namespace DTO_QLHT.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassroomId");
-
                     b.HasIndex("SubjectId");
 
                     b.HasIndex("TeacherId");
+
+                    b.HasIndex("ClassroomId", "SubjectId")
+                        .IsUnique();
 
                     b.ToTable("Teaches");
                 });
@@ -389,7 +395,7 @@ namespace DTO_QLHT.Migrations
                     b.HasOne("Teacher", "Teacher")
                         .WithMany("Teaches")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Classroom");
