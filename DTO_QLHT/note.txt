@@ -1,7 +1,8 @@
 ﻿Student classroom khong can 1 entity rieng
 
-Quan ly lop hoc: them cot số học sinh, thêm form cho add học sinh vào lớp, chọn gv chủ nhiệm
+Quan ly lop hoc: them cot số học sinh
 quan ly teach: hien them so luong hoc sinh trong lop do
 Teach : Lớp + môn là khóa chính, giáo viên là fk
+Thêm tính năng lock điểm: Giáo vụ lock lớp đó thì search all teach lớp đó lock lại, giáo viên không thể sửa điểm
 
 teach: chỉ lấy năm nay

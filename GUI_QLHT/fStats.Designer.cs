@@ -36,10 +36,9 @@
             // 
             // btnViewStats
             // 
-            btnViewStats.Location = new Point(328, 20);
-            btnViewStats.Margin = new Padding(2);
+            btnViewStats.Location = new Point(469, 33);
             btnViewStats.Name = "btnViewStats";
-            btnViewStats.Size = new Size(95, 37);
+            btnViewStats.Size = new Size(136, 62);
             btnViewStats.TabIndex = 7;
             btnViewStats.Text = "Xem điểm";
             btnViewStats.UseVisualStyleBackColor = true;
@@ -49,33 +48,30 @@
             // 
             dtgvClass.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtgvClass.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvClass.Location = new Point(-1, 116);
-            dtgvClass.Margin = new Padding(2);
+            dtgvClass.Location = new Point(-1, 193);
             dtgvClass.Name = "dtgvClass";
             dtgvClass.ReadOnly = true;
             dtgvClass.RowHeadersWidth = 62;
-            dtgvClass.Size = new Size(755, 269);
+            dtgvClass.Size = new Size(1079, 448);
             dtgvClass.TabIndex = 6;
             // 
             // cbYear
             // 
             cbYear.FormattingEnabled = true;
-            cbYear.Location = new Point(65, 20);
-            cbYear.Margin = new Padding(2);
+            cbYear.Location = new Point(93, 33);
             cbYear.Name = "cbYear";
-            cbYear.Size = new Size(129, 23);
+            cbYear.Size = new Size(183, 33);
             cbYear.TabIndex = 9;
             cbYear.SelectedIndexChanged += cbYear_SelectedIndexChanged;
             // 
             // fStats
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(754, 384);
+            ClientSize = new Size(1077, 640);
             Controls.Add(cbYear);
             Controls.Add(btnViewStats);
             Controls.Add(dtgvClass);
-            Margin = new Padding(2);
             Name = "fStats";
             Text = "fStats";
             ((System.ComponentModel.ISupportInitialize)dtgvClass).EndInit();

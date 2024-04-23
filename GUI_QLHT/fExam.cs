@@ -37,18 +37,18 @@ namespace GUI_QLHT
         public void SetTextButton(DataGridView dtgv, Button btn, SemesterEnum semester, FactorEnum factor)
         {
             string labelText;
-            int columnIndex;
+            string columnName;
             int semesterInt = semester == SemesterEnum.I ? 1 : 2;
 
             if (factor == FactorEnum.I)
             {
                 labelText = "15p";
-                columnIndex = 2;
+                columnName = "15p2";
             }
             else
             {
                 labelText = "45p";
-                columnIndex = 4;
+                columnName = "45p2";
             }
             string columnDataPropertyName = $"Semester{semesterInt}NormalGrade{labelText}2";
 
@@ -68,8 +68,8 @@ namespace GUI_QLHT
             else if (count == 2)
             {
                 btn.Text = $"Xóa cột {labelText}";
-                dtgv.Columns[columnIndex].Visible = true;
-                dtgv.Columns[columnIndex].DataPropertyName = columnDataPropertyName;
+                dtgv.Columns[columnName].Visible = true;
+                dtgv.Columns[columnName].DataPropertyName = columnDataPropertyName;
             }
         }
 
@@ -77,18 +77,18 @@ namespace GUI_QLHT
         private void HandleToggle(DataGridView dtgv, Button btn, SemesterEnum semester, FactorEnum factor)
         {
             string labelText;
-            int columnIndex;
+            string columnName;
             int semesterInt = semester == SemesterEnum.I ? 1 : 2;
 
             if (factor == FactorEnum.I)
             {
                 labelText = "15p";
-                columnIndex = 2;
+                columnName = "15p2";
             }
             else
             {
                 labelText = "45p";
-                columnIndex = 4;
+                columnName = "45p2";
             }
             string columnDataPropertyName = $"Semester{semesterInt}NormalGrade{labelText}2";
 
@@ -112,13 +112,13 @@ namespace GUI_QLHT
                     .NormalGrades
                     .Add(new NormalGrade() { Factor = factor });
                 }
-                dtgv.Columns[columnIndex].Visible = true;
-                dtgv.Columns[columnIndex].DataPropertyName = columnDataPropertyName;
+                dtgv.Columns[columnName].Visible = true;
+                dtgv.Columns[columnName].DataPropertyName = columnDataPropertyName;
             }
             else if (count == 2)
             {
-                dtgv.Columns[columnIndex].Visible = false;
-                dtgv.Columns[columnIndex].DataPropertyName = "";
+                dtgv.Columns[columnName].Visible = false;
+                dtgv.Columns[columnName].DataPropertyName = "";
 
                 btn.Text = $"Thêm cột {labelText}";
                 foreach (var sg in teach.SubjectGrade)
@@ -142,56 +142,63 @@ namespace GUI_QLHT
 
         public void LoadData(int teachId)
         {
-            teach = (Teach)teachService.GetExamByTeachId(2);
+            teach = teachService.InitGrade(teachId);
+            if (teach == null)
+                teach = teachService.GetExamByTeachId(teachId);
         }
 
         public void InitTabPage(DataGridView dtgv, SemesterEnum semester)
         {
-            int semesterInt = semester == SemesterEnum.I ? 1 : 2;
             dtgv.AutoGenerateColumns = false;
-            dtgv.ColumnCount = 6;
+            int semesterInt = semester == SemesterEnum.I ? 1 : 2;
 
             List<StudyData> dtSource = teach.SubjectGrade.Select(sg => new StudyData(ref sg)).ToList<StudyData>();
             dtgv.DataSource = dtSource;
 
-            dtgv.Columns[0].DataPropertyName = "StudentName";
-            dtgv.Columns[0].HeaderText = "Tên học sinh";
+            dtgv.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "StudentName",
+                HeaderText = "Tên học sinh",
+                DataPropertyName = "StudentName"
+            });
 
-            dtgv.Columns[1].DataPropertyName = $"Semester{semesterInt}NormalGrade15p1";
-            dtgv.Columns[1].HeaderText = "15p (1)";
+            dtgv.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "15p1",
+                HeaderText = "15p (1)",
+                DataPropertyName = $"Semester{semesterInt}NormalGrade15p1"
+            });
 
-            dtgv.Columns[2].DataPropertyName = "";
-            dtgv.Columns[2].HeaderText = "15p (2)";
-            dtgv.Columns[2].Visible = false;
+            dtgv.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "15p2",
+                HeaderText = "15p (2)",
+                DataPropertyName = "",
+                Visible = false
+            });
 
-            dtgv.Columns[3].DataPropertyName = $"Semester{semesterInt}NormalGrade45p1";
-            dtgv.Columns[3].HeaderText = "45p (1)";
+            dtgv.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "45p1",
+                HeaderText = "45p (1)",
+                DataPropertyName = $"Semester{semesterInt}NormalGrade45p1"
+            });
 
-            dtgv.Columns[4].DataPropertyName = "";
-            dtgv.Columns[4].HeaderText = "45p (2)";
-            dtgv.Columns[4].Visible = false;
+            dtgv.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "45p2",
+                HeaderText = "45p (2)",
+                DataPropertyName = "",
+                Visible = false
+            });
 
-            dtgv.Columns[5].DataPropertyName = $"Semester{semesterInt}FinalGrade";
-            dtgv.Columns[5].HeaderText = "Cuối kỳ";
-
-            //AddIndexColumn();
+            dtgv.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "FinalGrade",
+                HeaderText = "Cuối kỳ",
+                DataPropertyName = $"Semester{semesterInt}FinalGrade"
+            });
         }
-
-        //private void AddIndexColumn()
-        //{
-        //    var indexColumn = new DataGridViewTextBoxColumn();
-        //    indexColumn.Name = "IndexColumn";
-        //    indexColumn.HeaderText = "Index";
-
-        //    indexColumn.ReadOnly = true;
-
-        //    dtgv.Columns.Insert(0, indexColumn);
-
-        //    for (int i = 0; i < dtgv.Rows.Count; i++)
-        //    {
-        //        dtgv.Rows[i].Cells["IndexColumn"].Value = (i + 1).ToString();
-        //    }
-        //}
 
         private void btnSaveSe1_Click(object sender, EventArgs e)
         {
@@ -222,6 +229,24 @@ namespace GUI_QLHT
         private void btnToggle45Sem2_Click(object sender, EventArgs e)
         {
             HandleToggle(dtgvTeach2, btnToggle45Sem2, SemesterEnum.II, FactorEnum.II);
+        }
+
+        private void dtgvTeach1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            foreach (DataGridViewRow row in dtgvTeach1.Rows)
+            {
+                int rowIndex = row.Index;
+                row.HeaderCell.Value = rowIndex.ToString();
+            }
+        }
+
+        private void dtgvTeach2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            foreach (DataGridViewRow row in dtgvTeach2.Rows)
+            {
+                int rowIndex = row.Index;
+                row.HeaderCell.Value = rowIndex.ToString();
+            }
         }
     }
 

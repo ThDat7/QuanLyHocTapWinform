@@ -16,13 +16,13 @@ namespace GUI_QLHT
         private ClassroomService classroomService = new ClassroomService();
         private BindingSource classroomBinding = new BindingSource();
 
-        public fStats(int classroomId)
+        public fStats()
         {
             InitializeComponent();
-            LoadData(classroomId);
+            LoadData();
         }
 
-        private void LoadData(int classroomId)
+        private void LoadData()
         {
             dtgvClass.DataSource = classroomBinding;
             cbYear.Items.Clear();

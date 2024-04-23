@@ -79,5 +79,61 @@ namespace DAL_QLHT
                 return rowEffected > 0;
             }
         }
+
+        public Boolean IsGradeExists(int teachId)
+        {
+            using (db = new student_managementContext())
+            {
+                var count = db.SubjectGrades
+                               .Where(sg => sg.TeachId==teachId)
+                               .Count();
+                return count > 0;
+            }
+        }
+
+        public Teach CreateSubjectForTeach(int teachId)
+        {
+            Teach t = tracked_db.Teaches
+                .Where(t => t.Id == teachId)
+                .Include("Classroom.Students")
+                .FirstOrDefault();
+
+            if (t.Classroom.Students?.Count == 0)
+                return t;
+
+            t.SubjectGrade = new List<SubjectGrade>();
+
+            foreach(Student s in t.Classroom.Students)
+            {
+                NormalGrade ng115 = new NormalGrade() { Factor = FactorEnum.I };
+                NormalGrade ng215 = new NormalGrade() { Factor = FactorEnum.I };
+                NormalGrade ng145 = new NormalGrade() { Factor = FactorEnum.II };
+                NormalGrade ng245 = new NormalGrade() { Factor = FactorEnum.II };
+
+                SubjectGradeSemester sgs1 = new SubjectGradeSemester()
+                {
+                    Semester = SemesterEnum.I,
+                    NormalGrades = new List<NormalGrade>() { ng115, ng145 },
+                    FinalGrade = new FinalGrade()
+                };
+                SubjectGradeSemester sgs2 = new SubjectGradeSemester() { 
+                    Semester = SemesterEnum.II,
+                    NormalGrades = new List<NormalGrade>() { ng215, ng245 },
+                    FinalGrade = new FinalGrade()
+                };
+
+                SubjectGrade sg = new SubjectGrade() { 
+                    TeachId = t.Id, 
+                    StudentId = s.Id, 
+                    SubjectGradeSemesters = new List<SubjectGradeSemester>() { sgs1, sgs2}
+                };
+
+                t.SubjectGrade.Add(sg);
+            }
+
+            tracked_db.Update(t);
+            tracked_db.SaveChanges();
+            return t;
+        }
     }
 }

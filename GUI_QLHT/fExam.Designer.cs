@@ -111,6 +111,7 @@
             dtgvTeach1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dtgvTeach1.Size = new Size(1058, 488);
             dtgvTeach1.TabIndex = 14;
+            dtgvTeach1.RowsAdded += dtgvTeach1_RowsAdded;
             // 
             // tabPage2
             // 
@@ -166,6 +167,7 @@
             dtgvTeach2.RowHeadersWidth = 62;
             dtgvTeach2.Size = new Size(1058, 488);
             dtgvTeach2.TabIndex = 18;
+            dtgvTeach2.RowsAdded += dtgvTeach2_RowsAdded;
             // 
             // fExam
             // 

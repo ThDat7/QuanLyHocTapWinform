@@ -154,16 +154,23 @@ namespace GUI_QLHT
 
             foreach (var classroom in classrooms)
             {
+                var usedSubjects = new HashSet<int>();
                 for (int i = 0; i < 3; i++)
                 {
-                    var randomSubject = subjects[random.Next(subjects.Count)];
-
-                    context.Teaches.Add(new Teach()
+                    var availableSubjects = subjects.Where(s => !usedSubjects.Contains(s.Id)).ToList();
+                    if (availableSubjects.Any())
                     {
-                        TeacherId = teachers[random.Next(teachers.Count)].Id,
-                        SubjectId = randomSubject.Id,
-                        ClassroomId = classroom.Id
-                    });
+                        var randomSubject = availableSubjects[random.Next(availableSubjects.Count)];
+
+                        context.Teaches.Add(new Teach()
+                        {
+                            TeacherId = teachers[random.Next(teachers.Count)].Id,
+                            SubjectId = randomSubject.Id,
+                            ClassroomId = classroom.Id
+                        });
+
+                        usedSubjects.Add(randomSubject.Id);
+                    }
                 }
             }
 

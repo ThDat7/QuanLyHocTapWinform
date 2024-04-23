@@ -66,12 +66,18 @@ namespace GUI_QLHT
             else if (text == "Học kỳ 2")
                 semester = SemesterEnum.II;
 
-            if (semester != null)
-                dttb = ToDataTable(subjectGradeService.GetAvgExamByClass(classroomId, semester));
-            else
-                ;
+            dttb = ToDataTable(subjectGradeService.GetAvgExamByClass(classroomId, semester));
 
             statsBinding.DataSource = dttb;
+        }
+
+        private void dtgvStats_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            foreach (DataGridViewRow row in dtgvStats.Rows)
+            {
+                int rowIndex = row.Index;
+                row.HeaderCell.Value = rowIndex.ToString();
+            }
         }
     }
 }

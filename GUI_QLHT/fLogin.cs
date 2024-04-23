@@ -30,11 +30,9 @@ namespace GUI_QLHT
             try
             {
                 User user = userService.Login(username, password);
-
-                this.Hide();
                 fMenu fmenu = new fMenu(user);
-                fmenu.ShowDialog();
-                this.Show();
+                fmenu.Show();
+                this.Hide();
             }
             catch (Exception ex)
             {

@@ -32,10 +32,17 @@ namespace BUS_QLHT
             return teachDao.AddTeach(classroomId, teacherId, subjectId);
         }
 
-
         public Boolean RemoveTeach(int teachId)
         {
             return teachDao.RemoveTeach(teachId);
+        }
+
+        public Teach InitGrade(int teachId)
+        {
+            if (teachDao.IsGradeExists(teachId))
+                return null;
+
+            return teachDao.CreateSubjectForTeach(teachId);
         }
     }
 }

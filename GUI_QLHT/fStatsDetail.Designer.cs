@@ -37,32 +37,32 @@
             // 
             dtgvStats.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtgvStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvStats.Location = new Point(-1, 56);
-            dtgvStats.Margin = new Padding(2);
+            dtgvStats.Location = new Point(-1, 93);
             dtgvStats.Name = "dtgvStats";
             dtgvStats.ReadOnly = true;
             dtgvStats.RowHeadersWidth = 62;
-            dtgvStats.Size = new Size(756, 329);
+            dtgvStats.Size = new Size(1080, 548);
             dtgvStats.TabIndex = 7;
+            dtgvStats.RowsAdded += dtgvStats_RowsAdded;
             // 
             // cbSemester
             // 
             cbSemester.FormattingEnabled = true;
             cbSemester.Items.AddRange(new object[] { "Học kỳ 1", "Học kỳ 2", "Cả năm" });
-            cbSemester.Location = new Point(334, 11);
-            cbSemester.Margin = new Padding(2);
+            cbSemester.Location = new Point(477, 18);
             cbSemester.Name = "cbSemester";
-            cbSemester.Size = new Size(129, 23);
+            cbSemester.Size = new Size(183, 33);
             cbSemester.TabIndex = 8;
             cbSemester.SelectedIndexChanged += cbSemester_SelectedIndexChanged;
             // 
             // fStatsDetail
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(754, 384);
+            ClientSize = new Size(1077, 640);
             Controls.Add(cbSemester);
             Controls.Add(dtgvStats);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "fStatsDetail";
             Text = "fStatsDetail";
             ((System.ComponentModel.ISupportInitialize)dtgvStats).EndInit();

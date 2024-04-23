@@ -16,7 +16,13 @@ namespace DAL_QLHT
         private student_managementContext db;
         public List<Dictionary<String, object>> GetAvgExamByClass(int classroomId, SemesterEnum? semester)
         {
-            int semesterInt = semester == SemesterEnum.I ? 1 : 2;
+            int semesterInt;
+            if (semester == SemesterEnum.I)
+                semesterInt = 1;
+            else if (semester == SemesterEnum.II)
+                semesterInt = 2;
+            else semesterInt = 0;
+
             using (db = new student_managementContext()) 
             {
                 List<Dictionary<string, object>> result = new List<Dictionary<string, object>>();
