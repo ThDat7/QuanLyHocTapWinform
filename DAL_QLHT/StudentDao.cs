@@ -70,14 +70,16 @@ namespace DAL_QLHT
             }
         }
 
-        public List<Object> Search(string keyword, List<int> excludeIds)
+        public List<Object> SearchNotInClassroom(string keyword, int classroomId)
         {
             using(db = new student_managementContext())
             {
                 var query = db.Students
                             .Where(s => (s.LastName+" "+s.FirstName)
                                             .Contains(keyword)
-                                        && !excludeIds.Contains(s.Id))
+                                        && !(db.Students.Where(s => 
+                                                s.Classrooms.Any(c => c.Id==classroomId))
+                                        .Select(s => s.Id).Contains(s.Id)))
                             .Select(s => new
                             {
                                 s.Id,

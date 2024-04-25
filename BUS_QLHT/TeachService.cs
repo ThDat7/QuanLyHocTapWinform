@@ -12,9 +12,12 @@ namespace BUS_QLHT
 
         TeachDao teachDao = new TeachDao();
 
-        public List<Object> GetTeachesByUserId(int userId)
+        public List<Object> GetTeachForManage(User user)
         {
-            return teachDao.GetTeachesByUserId(userId);
+            if (user.Role == RoleEnum.ADMIN)
+                return teachDao.GetTeaches();
+
+            return teachDao.GetTeachesByUserId(user.Id);
         }
 
         public Teach GetExamByTeachId(int teachId)
@@ -42,7 +45,12 @@ namespace BUS_QLHT
             if (teachDao.IsGradeExists(teachId))
                 return null;
 
+            try {
             return teachDao.CreateSubjectForTeach(teachId);
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

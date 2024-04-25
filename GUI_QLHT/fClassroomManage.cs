@@ -95,19 +95,19 @@ namespace GUI_QLHT
         private void btnSearchStudent_Click(object sender, EventArgs e)
         {
             string keyword = txbSearchStudent.Text;
-            searchStudentsBinding.DataSource = studentService.Search(keyword, new List<int>());
+            searchStudentsBinding.DataSource = studentService.SearchAddToClassroom(keyword, classroomId);
         }
 
         private void btnSearchTeacher1_Click(object sender, EventArgs e)
         {
             string keyword = txbSearchHomeroomTeacher.Text;
-            searchHomeroomTeachersBinding.DataSource = teacherService.Search(keyword, new List<int>());
+            searchHomeroomTeachersBinding.DataSource = teacherService.SearchNotIsHomeroomTeacher(keyword, classroomId);
         }
 
         private void btnSearchTeacher2_Click(object sender, EventArgs e)
         {
             string keyword = txbSearchSubjectTeacher.Text;
-            searchSubjectTeachersBinding.DataSource = teacherService.Search(keyword, new List<int>());
+            searchSubjectTeachersBinding.DataSource = teacherService.Search(keyword);
         }
 
         private int GetFirstCellSelectedRow(DataGridView dtgv)

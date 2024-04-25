@@ -12,7 +12,7 @@ namespace DAL_QLHT
     {
         private student_managementContext db;
 
-        public List<Object> Search(string keyword, List<int> excludeIds)
+        public List<Object> SearchNotIsHomeroomTeacher(string keyword, int classroomId)
         {
             using (db = new student_managementContext())
             {
@@ -20,7 +20,28 @@ namespace DAL_QLHT
                             .Where(t =>
                                 (t.User.LastName+" "+t.User.FirstName)
                                     .Contains(keyword)
-                                && !excludeIds.Contains(t.Id))
+                                && !(db.Classrooms.Where(c => c.Id==classroomId)
+                                    .Any(c => c.HomeroomTeacherId==t.Id)))
+                            .Select(t => new
+                            {
+                                Id = t.Id,
+                                Name = $"{t.User.LastName} {t.User.FirstName}",
+                                Dob = t.User.Dob,
+                                Address = t.User.Address
+                            });
+
+                return query.ToList<Object>();
+            }
+        }
+
+        public List<Object> Search(string keyword)
+        {
+            using (db = new student_managementContext())
+            {
+                var query = db.Teachers
+                            .Where(t =>
+                                (t.User.LastName + " " + t.User.FirstName)
+                                    .Contains(keyword))
                             .Select(t => new
                             {
                                 Id = t.Id,

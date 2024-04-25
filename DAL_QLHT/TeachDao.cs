@@ -39,6 +39,25 @@ namespace DAL_QLHT
             }
         }
 
+        public List<Object> GetTeaches()
+        {
+            using (db = new student_managementContext())
+            {
+                var query = db.Teaches
+                                .Include("Classroom.Students")
+                                .Include("Subject")
+                                .Select(t => new
+                                {
+                                    TeachId = t.Id,
+                                    t.Classroom.Year,
+                                    t.Classroom.Grade,
+                                    t.Classroom.Order,
+                                    t.Subject.Name
+                                });
+                return query.ToList<Object>();
+            }
+        }
+
         public Teach GetExamByTeachId(int teachId)
         {
             var query = from teach in tracked_db.Teaches

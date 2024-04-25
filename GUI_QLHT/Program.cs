@@ -8,8 +8,6 @@ namespace GUI_QLHT
         /// </summary>
         /// 
 
-        public static User user;
-
         [STAThread]
         static void Main()
         {
@@ -19,7 +17,7 @@ namespace GUI_QLHT
 
             FakeData fakeData = new FakeData();
             //fakeData.CreateFakeData();
-            Application.Run(new fStatsDetail(2));
+            Application.Run(new fLogin());
         }
     }
 }

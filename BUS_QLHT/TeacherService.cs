@@ -11,9 +11,14 @@ namespace BUS_QLHT
     {
         private TeacherDao teacherDao = new TeacherDao();
 
-        public List<Object> Search(string keyword, List<int> excludeIds)
+        public List<Object> SearchNotIsHomeroomTeacher(string keyword, int classroomId)
         {
-            return teacherDao.Search(keyword, excludeIds);
+            return teacherDao.SearchNotIsHomeroomTeacher(keyword, classroomId);
+        }
+
+        public List<Object> Search(string keyword)
+        {
+            return teacherDao.Search(keyword);
         }
     }
 }

@@ -13,12 +13,12 @@ namespace GUI_QLHT
     public partial class fMenu : Form
     {
 
-        private User user;
+        public static User currentUser;
         public fMenu(User user)
         {
             InitializeComponent();
 
-            this.user = user;
+            fMenu.currentUser = user;
             //if (user == null ) 
             //    this.Close();
 
@@ -27,7 +27,7 @@ namespace GUI_QLHT
 
         private void VisibleBtnByRole()
         {
-            switch (user.Role)
+            switch (currentUser.Role)
             {
                 case RoleEnum.ADMIN:
                     btnUser.Visible = true;

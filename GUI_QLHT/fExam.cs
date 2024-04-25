@@ -24,6 +24,14 @@ namespace GUI_QLHT
             InitializeComponent();
             LoadData(teachId);
 
+            InitForm();
+        }
+
+        private void InitForm()
+        {
+            if (teach.Classroom.Students == null ||
+                teach.Classroom.Students.Count == 0)
+                return;
             InitTabPage(dtgvTeach1, SemesterEnum.I);
             InitTabPage(dtgvTeach2, SemesterEnum.II);
 
@@ -142,7 +150,13 @@ namespace GUI_QLHT
 
         public void LoadData(int teachId)
         {
-            teach = teachService.InitGrade(teachId);
+            try
+            {
+                teach = teachService.InitGrade(teachId);
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Lớp học chưa có học sinh", ex.Message);
+            }
             if (teach == null)
                 teach = teachService.GetExamByTeachId(teachId);
         }

@@ -35,9 +35,10 @@ namespace BUS_QLHT
             return studentDao.GetInClass(classroomId);
         }
 
-        public List<Object> Search(string keyword, List<int> excludeIds)
+        public List<Object> SearchAddToClassroom(string keyword, int classroomId)
         {
-            return studentDao.Search(keyword, excludeIds);
+            
+            return studentDao.SearchNotInClassroom(keyword, classroomId);
         }
     }
 }

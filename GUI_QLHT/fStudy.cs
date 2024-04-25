@@ -26,7 +26,7 @@ namespace GUI_QLHT
         {
             dtgvTeach.DataSource = teachList;
 
-            List<Object> teaches = teachService.GetTeachesByUserId(3);
+            List<Object> teaches = teachService.GetTeachForManage(fMenu.currentUser);
             teachList.DataSource = teaches;
         }
 
