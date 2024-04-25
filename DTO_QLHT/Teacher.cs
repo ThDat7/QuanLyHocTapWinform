@@ -14,7 +14,5 @@ public class Teacher
     public int UserId { get; set; }
     public virtual User User { get; set; }
 
-
-    [ForeignKey("TeacherId")]
     public virtual ICollection<Teach> Teaches { get; set; }
 }

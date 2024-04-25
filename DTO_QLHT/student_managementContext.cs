@@ -45,6 +45,11 @@ namespace DTO_QLHT
             .Property(c => c.IsLock)
             .HasDefaultValue(false);
             OnModelCreatingPartial(modelBuilder);
+
+            modelBuilder.Entity<Teach>()
+                .HasOne(t => t.Teacher)
+                .WithMany(t => t.Teaches)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -54,7 +59,7 @@ namespace DTO_QLHT
         //        .WithMany(t => t.Teaches)
         //        .OnDelete(DeleteBehavior.Restrict);
 
-        //    // Thiết lập các ràng buộc ngoại khác tại đây
+        ////     Thiết lập các ràng buộc ngoại khác tại đây
 
         //    base.OnModelCreating(modelBuilder);
         //}

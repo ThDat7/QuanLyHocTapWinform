@@ -19,5 +19,5 @@ public class SubjectGrade
     public virtual Teach Teach { get; set; }
 
     //public virtual ICollection<SubjectGradeSemester>? SubjectGradeSemesters { get; set; }
-    public virtual List<SubjectGradeSemester>? SubjectGradeSemesters { get; set; }
+    public virtual List<SubjectGradeSemester> SubjectGradeSemesters { get; set; }
 }

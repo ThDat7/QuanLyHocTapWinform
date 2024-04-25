@@ -28,9 +28,9 @@ public class Classroom
     public virtual Teacher? HomeroomTeacher { get; set; }
 
     //public virtual ICollection<Student>? Students { get; set; }
-    public virtual List<Student>? Students { get; set; }
+    public virtual List<Student> Students { get; set; }
 
-    public virtual ICollection<Teach>? Teaches { get; set; }
+    public virtual ICollection<Teach> Teaches { get; set; }
 }
 
 public enum GradeEnum

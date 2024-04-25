@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DTO_QLHT.Migrations
 {
     [DbContext(typeof(student_managementContext))]
-    [Migration("20240423224356_1")]
+    [Migration("20240425151624_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -395,7 +395,7 @@ namespace DTO_QLHT.Migrations
                     b.HasOne("Teacher", "Teacher")
                         .WithMany("Teaches")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Classroom");

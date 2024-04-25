@@ -19,7 +19,7 @@ namespace GUI_QLHT
 
             FakeData fakeData = new FakeData();
             //fakeData.CreateFakeData();
-            Application.Run(new fClassroomManage(2));
+            Application.Run(new fStatsDetail(2));
         }
     }
 }

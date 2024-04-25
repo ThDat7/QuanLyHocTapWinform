@@ -393,7 +393,7 @@ namespace DTO_QLHT.Migrations
                     b.HasOne("Teacher", "Teacher")
                         .WithMany("Teaches")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Classroom");

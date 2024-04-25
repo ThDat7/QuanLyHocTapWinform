@@ -32,7 +32,7 @@ public class Student
 
     //[StringLength(20)]
     public string? Phone { get; set; }
-    public virtual ICollection<Classroom>? Classrooms { get; set; }
+    public virtual ICollection<Classroom> Classrooms { get; set; }
 }
 
 public enum SexEnum
