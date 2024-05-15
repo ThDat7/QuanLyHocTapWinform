@@ -105,7 +105,6 @@ namespace DAL_QLHT
 
         public List<Object> GetSubjetTeachers(int id)
         {
-            id = 2;
             using (db = new student_managementContext())
             {
                 var query = from teach in db.Teaches

@@ -34,7 +34,7 @@ namespace DAL_QLHT
             }
         }
 
-        public List<Object> Search(string keyword)
+        public List<Object> Search(string keyword, int subjectId)
         {
             using (db = new student_managementContext())
             {

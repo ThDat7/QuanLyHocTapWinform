@@ -73,5 +73,9 @@
 
         private DataGridView dtgvStats;
         private ComboBox cbSemester;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Grade;
+        private DataGridViewTextBoxColumn Order;
+        private DataGridViewTextBoxColumn Year;
     }
 }

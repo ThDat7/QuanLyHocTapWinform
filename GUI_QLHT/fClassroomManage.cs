@@ -106,8 +106,11 @@ namespace GUI_QLHT
 
         private void btnSearchTeacher2_Click(object sender, EventArgs e)
         {
+            int subjectSelectedIndex = cbSubject.SelectedIndex;
+            Subject selectedSubject = subjects[subjectSelectedIndex];
+
             string keyword = txbSearchSubjectTeacher.Text;
-            searchSubjectTeachersBinding.DataSource = teacherService.Search(keyword);
+            searchSubjectTeachersBinding.DataSource = teacherService.Search(keyword, selectedSubject.Id);
         }
 
         private int GetFirstCellSelectedRow(DataGridView dtgv)

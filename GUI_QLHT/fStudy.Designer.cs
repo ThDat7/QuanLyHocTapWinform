@@ -30,6 +30,11 @@
         {
             dtgvTeach = new DataGridView();
             btnEditExam = new Button();
+            TeachId = new DataGridViewTextBoxColumn();
+            Year = new DataGridViewTextBoxColumn();
+            Grade = new DataGridViewTextBoxColumn();
+            Order = new DataGridViewTextBoxColumn();
+            Name = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dtgvTeach).BeginInit();
             SuspendLayout();
             // 
@@ -37,6 +42,7 @@
             // 
             dtgvTeach.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtgvTeach.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvTeach.Columns.AddRange(new DataGridViewColumn[] { TeachId, Year, Grade, Order, Name });
             dtgvTeach.Location = new Point(-1, 227);
             dtgvTeach.Name = "dtgvTeach";
             dtgvTeach.RowHeadersWidth = 62;
@@ -53,6 +59,46 @@
             btnEditExam.UseVisualStyleBackColor = true;
             btnEditExam.Click += btnEditExam_Click;
             // 
+            // TeachId
+            // 
+            TeachId.DataPropertyName = "TeachId";
+            TeachId.HeaderText = "Mã";
+            TeachId.MinimumWidth = 8;
+            TeachId.Name = "TeachId";
+            TeachId.Width = 150;
+            // 
+            // Year
+            // 
+            Year.DataPropertyName = "Year";
+            Year.HeaderText = "Năm học";
+            Year.MinimumWidth = 8;
+            Year.Name = "Year";
+            Year.Width = 150;
+            // 
+            // Grade
+            // 
+            Grade.DataPropertyName = "Grade";
+            Grade.HeaderText = "Khối";
+            Grade.MinimumWidth = 8;
+            Grade.Name = "Grade";
+            Grade.Width = 150;
+            // 
+            // Order
+            // 
+            Order.DataPropertyName = "Order";
+            Order.HeaderText = "Thứ tự";
+            Order.MinimumWidth = 8;
+            Order.Name = "Order";
+            Order.Width = 150;
+            // 
+            // Name
+            // 
+            Name.DataPropertyName = "Name";
+            Name.HeaderText = "Tên môn";
+            Name.MinimumWidth = 8;
+            Name.Name = "Name";
+            Name.Width = 150;
+            // 
             // fStudy
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -60,7 +106,7 @@
             ClientSize = new Size(1077, 640);
             Controls.Add(btnEditExam);
             Controls.Add(dtgvTeach);
-            Name = "fStudy";
+            //Name = "fStudy";
             Text = "fStudy";
             ((System.ComponentModel.ISupportInitialize)dtgvTeach).EndInit();
             ResumeLayout(false);
@@ -70,5 +116,10 @@
 
         private DataGridView dtgvTeach;
         private Button btnEditExam;
+        private DataGridViewTextBoxColumn TeachId;
+        private DataGridViewTextBoxColumn Year;
+        private DataGridViewTextBoxColumn Grade;
+        private DataGridViewTextBoxColumn Order;
+        private DataGridViewTextBoxColumn Name;
     }
 }

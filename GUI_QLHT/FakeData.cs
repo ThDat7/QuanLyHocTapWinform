@@ -25,7 +25,24 @@ namespace GUI_QLHT
             FakeSubject();
             FakeTeach();
             FakeSubjectGrade();
+        }
 
+        private String GetRandomLastName()
+        {
+            Random random = new Random();
+            String[] lastNames = new[] { "Nguyễn", "Trần", "Lê", "Phạm", "Hoàng", "Huỳnh", "Phan", "Vũ", "Võ", "Đặng", "Bùi", "Đỗ", "Hồ", "Ngô", "Dương", "Lý", "Đoàn", "Trương" };
+            return lastNames[random.Next(0, lastNames.Length)];
+        }
+
+        private String GetRandomName()
+        {
+            Random random = new Random();
+            String filePath = "./data-fake/name.txt";
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException($"The file at path {filePath} does not exist.");
+
+            string[] names = File.ReadAllLines(filePath);
+            return names[random.Next(0, names.Length)];
         }
 
         public  void FakeTeacher()
@@ -35,8 +52,8 @@ namespace GUI_QLHT
                     User = new User() 
                     { 
                         Username = "teacher" + i, Password = UserService.HashPassword("123"), Role = RoleEnum.TEACHER,
-                        FirstName = ""+ i,
-                        LastName = "last " + i
+                        FirstName = GetRandomName(),
+                        LastName = GetRandomLastName()
                     } 
                 });
             }
@@ -52,8 +69,8 @@ namespace GUI_QLHT
                         Username = "staff" + i,
                         Password = UserService.HashPassword("123"),
                         Role = RoleEnum.STAFF,
-                        FirstName = "" + i,
-                        LastName = "last " + i
+                        FirstName = GetRandomName(),
+                        LastName = GetRandomLastName()
                 });
             }
             context.SaveChanges();
@@ -68,8 +85,8 @@ namespace GUI_QLHT
                     Username = "admin" + i,
                     Password = UserService.HashPassword("123"),
                     Role = RoleEnum.ADMIN,
-                    FirstName = "" + i,
-                    LastName = "last " + i
+                    FirstName = GetRandomName(),
+                    LastName = GetRandomLastName()
                 });
             }
             context.SaveChanges();
@@ -82,21 +99,21 @@ namespace GUI_QLHT
                 context.Classrooms.Add(new Classroom()
                 {
                     Grade = GradeEnum.TENTH,
-                    Order = i,
+                    Order = i + 1,
                     Year = 2022 + i
                 });
 
                 context.Classrooms.Add(new Classroom()
                 {
                     Grade = GradeEnum.ELEVENTH,
-                    Order = i,
+                    Order = i + 1,
                     Year = 2022 + i
                 });
 
                 context.Classrooms.Add(new Classroom()
                 {
                     Grade = GradeEnum.TWELVETH,
-                    Order = i,
+                    Order = i + 1,
                     Year = 2020 + i
                 });
             }
@@ -107,13 +124,13 @@ namespace GUI_QLHT
         {
             var classrooms = context.Classrooms.ToList();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var student = new Student()
                 {
-                    FirstName = "" + i,
-                    LastName = "last " + i,
-                    Classrooms = classrooms.Take(2).ToList()
+                    FirstName = GetRandomName(),
+                    LastName = GetRandomLastName(),
+                    Classrooms = classrooms.Take(3).ToList()
                 };
 
                 context.Students.Add(student);
@@ -123,23 +140,24 @@ namespace GUI_QLHT
 
         public void FakeSubject()
         {
-            for (int i = 0; i < 3; i++)
+            String[] subjectsName = new[] { "Toán", "Vật lý", "Hóa", "Ngữ văn", "Tiếng anh", "Lịch sử", "Địa lý", "Sinh học", "Tin học"};
+            for (int i = 0; i < subjectsName.Length; i++)
             {
                 context.Subjects.Add(new Subject()
                 {
-                    Name = "subject" + i,
+                    Name = subjectsName[i],
                     Grade = GradeEnum.TENTH
                 });
 
                 context.Subjects.Add(new Subject()
                 {
-                    Name = "subject" + i,
+                    Name = subjectsName[i],
                     Grade = GradeEnum.ELEVENTH
                 });
 
                 context.Subjects.Add(new Subject()
                 {
-                    Name = "subject" + i,
+                    Name = subjectsName[i],
                     Grade = GradeEnum.TWELVETH
                 });
             }
@@ -154,7 +172,7 @@ namespace GUI_QLHT
             foreach (var classroom in classrooms)
             {
                 var usedSubjects = new HashSet<int>();
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     var availableSubjects = context.Subjects
                         .Where(s => !usedSubjects.Contains(s.Id) && s.Grade == classroom.Grade)

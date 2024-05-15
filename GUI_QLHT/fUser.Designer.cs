@@ -62,6 +62,17 @@
             btnDeleteUser = new Button();
             btnEditUser = new Button();
             btnAddUser = new Button();
+            Id = new DataGridViewTextBoxColumn();
+            Username = new DataGridViewTextBoxColumn();
+            Password = new DataGridViewTextBoxColumn();
+            LastName = new DataGridViewTextBoxColumn();
+            FirstName = new DataGridViewTextBoxColumn();
+            Dob = new DataGridViewTextBoxColumn();
+            Sex = new DataGridViewTextBoxColumn();
+            Address = new DataGridViewTextBoxColumn();
+            Phone = new DataGridViewTextBoxColumn();
+            Email = new DataGridViewTextBoxColumn();
+            Role = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tpTeacher.SuspendLayout();
             panel4.SuspendLayout();
@@ -303,6 +314,7 @@
             // 
             dtgvUser.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtgvUser.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvUser.Columns.AddRange(new DataGridViewColumn[] { Id, Username, Password, LastName, FirstName, Dob, Sex, Address, Phone, Email, Role });
             dtgvUser.Location = new Point(0, 3);
             dtgvUser.Name = "dtgvUser";
             dtgvUser.RowHeadersWidth = 62;
@@ -386,6 +398,95 @@
             btnAddUser.UseVisualStyleBackColor = true;
             btnAddUser.Click += btnAddUser_Click;
             // 
+            // Id
+            // 
+            Id.DataPropertyName = "Id";
+            Id.HeaderText = "Mã";
+            Id.MinimumWidth = 8;
+            Id.Name = "Id";
+            Id.Width = 150;
+            // 
+            // Username
+            // 
+            Username.DataPropertyName = "Username";
+            Username.HeaderText = "Tên đăng nhập";
+            Username.MinimumWidth = 8;
+            Username.Name = "Username";
+            Username.Width = 150;
+            // 
+            // Password
+            // 
+            Password.DataPropertyName = "Password";
+            Password.HeaderText = "Mật khẩu";
+            Password.MinimumWidth = 8;
+            Password.Name = "Password";
+            Password.Visible = false;
+            Password.Width = 150;
+            // 
+            // LastName
+            // 
+            LastName.DataPropertyName = "LastName";
+            LastName.HeaderText = "Họ";
+            LastName.MinimumWidth = 8;
+            LastName.Name = "LastName";
+            LastName.Width = 150;
+            // 
+            // FirstName
+            // 
+            FirstName.DataPropertyName = "FirstName";
+            FirstName.HeaderText = "Tên";
+            FirstName.MinimumWidth = 8;
+            FirstName.Name = "FirstName";
+            FirstName.Width = 150;
+            // 
+            // Dob
+            // 
+            Dob.DataPropertyName = "Dob";
+            Dob.HeaderText = "Ngày sinh";
+            Dob.MinimumWidth = 8;
+            Dob.Name = "Dob";
+            Dob.Width = 150;
+            // 
+            // Sex
+            // 
+            Sex.DataPropertyName = "Sex";
+            Sex.HeaderText = "Giới tính";
+            Sex.MinimumWidth = 8;
+            Sex.Name = "Sex";
+            Sex.Width = 150;
+            // 
+            // Address
+            // 
+            Address.DataPropertyName = "Address";
+            Address.HeaderText = "Địa chỉ";
+            Address.MinimumWidth = 8;
+            Address.Name = "Address";
+            Address.Width = 150;
+            // 
+            // Phone
+            // 
+            Phone.DataPropertyName = "Phone";
+            Phone.HeaderText = "Số điện thoại";
+            Phone.MinimumWidth = 8;
+            Phone.Name = "Phone";
+            Phone.Width = 150;
+            // 
+            // Email
+            // 
+            Email.DataPropertyName = "Email";
+            Email.HeaderText = "Email";
+            Email.MinimumWidth = 8;
+            Email.Name = "Email";
+            Email.Width = 150;
+            // 
+            // Role
+            // 
+            Role.DataPropertyName = "Role";
+            Role.HeaderText = "Chức vụ";
+            Role.MinimumWidth = 8;
+            Role.Name = "Role";
+            Role.Width = 150;
+            // 
             // fUser
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -445,5 +546,16 @@
         private Button btnShowUser;
         private ComboBox cbTypeUser;
         private DateTimePicker dtpkDob;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Username;
+        private DataGridViewTextBoxColumn Password;
+        private DataGridViewTextBoxColumn LastName;
+        private DataGridViewTextBoxColumn FirstName;
+        private DataGridViewTextBoxColumn Dob;
+        private DataGridViewTextBoxColumn Sex;
+        private DataGridViewTextBoxColumn Address;
+        private DataGridViewTextBoxColumn Phone;
+        private DataGridViewTextBoxColumn Email;
+        private DataGridViewTextBoxColumn Role;
     }
 }

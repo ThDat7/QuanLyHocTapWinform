@@ -31,6 +31,10 @@
             btnViewStats = new Button();
             dtgvClass = new DataGridView();
             cbYear = new ComboBox();
+            Id = new DataGridViewTextBoxColumn();
+            Grade = new DataGridViewTextBoxColumn();
+            Order = new DataGridViewTextBoxColumn();
+            Year = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dtgvClass).BeginInit();
             SuspendLayout();
             // 
@@ -48,6 +52,7 @@
             // 
             dtgvClass.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtgvClass.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvClass.Columns.AddRange(new DataGridViewColumn[] { Id, Grade, Order, Year });
             dtgvClass.Location = new Point(-1, 193);
             dtgvClass.Name = "dtgvClass";
             dtgvClass.ReadOnly = true;
@@ -63,6 +68,42 @@
             cbYear.Size = new Size(183, 33);
             cbYear.TabIndex = 9;
             cbYear.SelectedIndexChanged += cbYear_SelectedIndexChanged;
+            // 
+            // Id
+            // 
+            Id.DataPropertyName = "Id";
+            Id.HeaderText = "Mã";
+            Id.MinimumWidth = 8;
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Width = 150;
+            // 
+            // Grade
+            // 
+            Grade.DataPropertyName = "Grade";
+            Grade.HeaderText = "Khối";
+            Grade.MinimumWidth = 8;
+            Grade.Name = "Grade";
+            Grade.ReadOnly = true;
+            Grade.Width = 150;
+            // 
+            // Order
+            // 
+            Order.DataPropertyName = "Order";
+            Order.HeaderText = "Thứ tự";
+            Order.MinimumWidth = 8;
+            Order.Name = "Order";
+            Order.ReadOnly = true;
+            Order.Width = 150;
+            // 
+            // Year
+            // 
+            Year.DataPropertyName = "Year";
+            Year.HeaderText = "Năm học";
+            Year.MinimumWidth = 8;
+            Year.Name = "Year";
+            Year.ReadOnly = true;
+            Year.Width = 150;
             // 
             // fStats
             // 
@@ -83,5 +124,9 @@
         private Button btnViewStats;
         private DataGridView dtgvClass;
         private ComboBox cbYear;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Grade;
+        private DataGridViewTextBoxColumn Order;
+        private DataGridViewTextBoxColumn Year;
     }
 }
