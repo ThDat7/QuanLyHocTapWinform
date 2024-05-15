@@ -57,6 +57,8 @@
             dtgvSearchTeacher2 = new DataGridView();
             btnLockClassroom = new Button();
             dtgvSubjectTeachers = new DataGridView();
+            SubjectTeacherId = new DataGridViewTextBoxColumn();
+            StudentId = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtgvSearchStudent).BeginInit();
@@ -90,7 +92,7 @@
             tabPage1.Controls.Add(dtgvStudentInClass);
             tabPage1.Location = new Point(4, 34);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3, 3, 3, 3);
+            tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(1059, 582);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Học sinh";
@@ -163,6 +165,7 @@
             dtgvStudentInClass.AllowUserToResizeRows = false;
             dtgvStudentInClass.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
             dtgvStudentInClass.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvStudentInClass.Columns.AddRange(new DataGridViewColumn[] { StudentId });
             dtgvStudentInClass.Location = new Point(0, 108);
             dtgvStudentInClass.Name = "dtgvStudentInClass";
             dtgvStudentInClass.RowHeadersWidth = 62;
@@ -184,7 +187,7 @@
             tabPage2.Controls.Add(dtgvSearchTeacher1);
             tabPage2.Location = new Point(4, 34);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3, 3, 3, 3);
+            tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(1059, 582);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Chủ nhiệm";
@@ -210,8 +213,10 @@
             // 
             // txbHomeroomName
             // 
+            txbHomeroomName.Enabled = false;
             txbHomeroomName.Location = new Point(113, 30);
             txbHomeroomName.Name = "txbHomeroomName";
+            txbHomeroomName.ReadOnly = true;
             txbHomeroomName.Size = new Size(158, 31);
             txbHomeroomName.TabIndex = 26;
             // 
@@ -379,12 +384,29 @@
             dtgvSubjectTeachers.AllowUserToResizeRows = false;
             dtgvSubjectTeachers.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
             dtgvSubjectTeachers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvSubjectTeachers.Columns.AddRange(new DataGridViewColumn[] { SubjectTeacherId });
             dtgvSubjectTeachers.Location = new Point(0, 103);
             dtgvSubjectTeachers.Name = "dtgvSubjectTeachers";
             dtgvSubjectTeachers.RowHeadersWidth = 62;
             dtgvSubjectTeachers.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dtgvSubjectTeachers.Size = new Size(596, 478);
             dtgvSubjectTeachers.TabIndex = 21;
+            // 
+            // SubjectTeacherId
+            // 
+            SubjectTeacherId.DataPropertyName = "Id";
+            SubjectTeacherId.HeaderText = "Id";
+            SubjectTeacherId.MinimumWidth = 8;
+            SubjectTeacherId.Name = "SubjectTeacherId";
+            SubjectTeacherId.Width = 150;
+            // 
+            // StudentId
+            // 
+            StudentId.DataPropertyName = "Id";
+            StudentId.HeaderText = "Id";
+            StudentId.MinimumWidth = 8;
+            StudentId.Name = "StudentId";
+            StudentId.Width = 150;
             // 
             // fClassroomManage
             // 
@@ -447,5 +469,7 @@
         private TextBox txbHomeroomDob;
         private TextBox txbHomeroomName;
         private ComboBox cbSubject;
+        private DataGridViewTextBoxColumn StudentId;
+        private DataGridViewTextBoxColumn SubjectTeacherId;
     }
 }

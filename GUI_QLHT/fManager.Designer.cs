@@ -54,6 +54,7 @@
             panel12 = new Panel();
             dtgvClassroom = new DataGridView();
             panel9 = new Panel();
+            btnClassroomDetail = new Button();
             txbClassroomYear = new TextBox();
             label21 = new Label();
             label22 = new Label();
@@ -140,14 +141,14 @@
             // 
             panel2.Controls.Add(btnSearchStudent);
             panel2.Controls.Add(txbSearchStudent);
-            panel2.Location = new Point(576, 3);
+            panel2.Location = new Point(732, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(475, 79);
+            panel2.Size = new Size(319, 79);
             panel2.TabIndex = 1;
             // 
             // btnSearchStudent
             // 
-            btnSearchStudent.Location = new Point(390, 9);
+            btnSearchStudent.Location = new Point(233, 9);
             btnSearchStudent.Name = "btnSearchStudent";
             btnSearchStudent.Size = new Size(82, 61);
             btnSearchStudent.TabIndex = 3;
@@ -157,9 +158,9 @@
             // 
             // txbSearchStudent
             // 
-            txbSearchStudent.Location = new Point(31, 24);
+            txbSearchStudent.Location = new Point(14, 24);
             txbSearchStudent.Name = "txbSearchStudent";
-            txbSearchStudent.Size = new Size(332, 31);
+            txbSearchStudent.Size = new Size(204, 31);
             txbSearchStudent.TabIndex = 1;
             // 
             // dtpkDob
@@ -322,7 +323,7 @@
             // cbClassroomYear
             // 
             cbClassroomYear.FormattingEnabled = true;
-            cbClassroomYear.Location = new Point(384, 76);
+            cbClassroomYear.Location = new Point(552, 24);
             cbClassroomYear.Name = "cbClassroomYear";
             cbClassroomYear.Size = new Size(182, 33);
             cbClassroomYear.TabIndex = 5;
@@ -347,6 +348,7 @@
             // 
             // panel9
             // 
+            panel9.Controls.Add(btnClassroomDetail);
             panel9.Controls.Add(txbClassroomYear);
             panel9.Controls.Add(label21);
             panel9.Controls.Add(label22);
@@ -359,6 +361,16 @@
             panel9.Name = "panel9";
             panel9.Size = new Size(475, 499);
             panel9.TabIndex = 6;
+            // 
+            // btnClassroomDetail
+            // 
+            btnClassroomDetail.Location = new Point(112, 327);
+            btnClassroomDetail.Name = "btnClassroomDetail";
+            btnClassroomDetail.Size = new Size(288, 67);
+            btnClassroomDetail.TabIndex = 9;
+            btnClassroomDetail.Text = "Chi tiết lớp học";
+            btnClassroomDetail.UseVisualStyleBackColor = true;
+            btnClassroomDetail.Click += btnClassroomDetail_Click;
             // 
             // txbClassroomYear
             // 
@@ -412,6 +424,7 @@
             // 
             txbClassroomId.Location = new Point(156, 13);
             txbClassroomId.Name = "txbClassroomId";
+            txbClassroomId.ReadOnly = true;
             txbClassroomId.Size = new Size(303, 31);
             txbClassroomId.TabIndex = 14;
             // 
@@ -428,14 +441,14 @@
             // 
             panel10.Controls.Add(btnSearchClassroom);
             panel10.Controls.Add(txbSearchClassroom);
-            panel10.Location = new Point(585, 3);
+            panel10.Location = new Point(741, 3);
             panel10.Name = "panel10";
-            panel10.Size = new Size(475, 79);
+            panel10.Size = new Size(319, 79);
             panel10.TabIndex = 5;
             // 
             // btnSearchClassroom
             // 
-            btnSearchClassroom.Location = new Point(390, 9);
+            btnSearchClassroom.Location = new Point(204, 9);
             btnSearchClassroom.Name = "btnSearchClassroom";
             btnSearchClassroom.Size = new Size(82, 61);
             btnSearchClassroom.TabIndex = 3;
@@ -445,9 +458,9 @@
             // 
             // txbSearchClassroom
             // 
-            txbSearchClassroom.Location = new Point(31, 24);
+            txbSearchClassroom.Location = new Point(18, 24);
             txbSearchClassroom.Name = "txbSearchClassroom";
-            txbSearchClassroom.Size = new Size(332, 31);
+            txbSearchClassroom.Size = new Size(159, 31);
             txbSearchClassroom.TabIndex = 1;
             // 
             // panel11
@@ -519,6 +532,7 @@
             // 
             txbStudentId.Location = new Point(156, 13);
             txbStudentId.Name = "txbStudentId";
+            txbStudentId.ReadOnly = true;
             txbStudentId.Size = new Size(303, 31);
             txbStudentId.TabIndex = 14;
             // 
@@ -606,7 +620,7 @@
             // 
             cbSubjectGrade.FormattingEnabled = true;
             cbSubjectGrade.Items.AddRange(new object[] { "10", "11", "12" });
-            cbSubjectGrade.Location = new Point(335, 76);
+            cbSubjectGrade.Location = new Point(553, 24);
             cbSubjectGrade.Name = "cbSubjectGrade";
             cbSubjectGrade.Size = new Size(182, 33);
             cbSubjectGrade.TabIndex = 9;
@@ -729,6 +743,7 @@
             // 
             txbSubjectId.Location = new Point(156, 13);
             txbSubjectId.Name = "txbSubjectId";
+            txbSubjectId.ReadOnly = true;
             txbSubjectId.Size = new Size(303, 31);
             txbSubjectId.TabIndex = 14;
             // 
@@ -745,14 +760,14 @@
             // 
             panel7.Controls.Add(btnSearchSubject);
             panel7.Controls.Add(txbSearchSubject);
-            panel7.Location = new Point(585, 3);
+            panel7.Location = new Point(741, 3);
             panel7.Name = "panel7";
-            panel7.Size = new Size(475, 79);
+            panel7.Size = new Size(319, 79);
             panel7.TabIndex = 5;
             // 
             // btnSearchSubject
             // 
-            btnSearchSubject.Location = new Point(390, 9);
+            btnSearchSubject.Location = new Point(217, 9);
             btnSearchSubject.Name = "btnSearchSubject";
             btnSearchSubject.Size = new Size(82, 61);
             btnSearchSubject.TabIndex = 3;
@@ -762,9 +777,9 @@
             // 
             // txbSearchSubject
             // 
-            txbSearchSubject.Location = new Point(31, 24);
+            txbSearchSubject.Location = new Point(20, 24);
             txbSearchSubject.Name = "txbSearchSubject";
-            txbSearchSubject.Size = new Size(332, 31);
+            txbSearchSubject.Size = new Size(170, 31);
             txbSearchSubject.TabIndex = 1;
             // 
             // fManager
@@ -883,5 +898,6 @@
         private ComboBox cbSubjectGrade;
         private ComboBox cbClassroomYear;
         private TextBox txbClassroomYear;
+        private Button btnClassroomDetail;
     }
 }

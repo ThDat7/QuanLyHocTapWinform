@@ -61,10 +61,8 @@ namespace DAL_QLHT
         public Teach GetExamByTeachId(int teachId)
         {
             var query = from teach in tracked_db.Teaches
-                        .Include("Classroom")
-                        .Include("SubjectGrade")
+                        .Include("Classroom.Students")
                         .Include("SubjectGrade.Student")
-                        .Include("SubjectGrade.SubjectGradeSemesters")
                         .Include("SubjectGrade.SubjectGradeSemesters.NormalGrades")
                         .Include("SubjectGrade.SubjectGradeSemesters.FinalGrade")
                         where teach.Id == teachId

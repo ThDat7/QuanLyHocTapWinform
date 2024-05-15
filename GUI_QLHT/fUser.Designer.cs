@@ -62,8 +62,6 @@
             btnDeleteUser = new Button();
             btnEditUser = new Button();
             btnAddUser = new Button();
-            tpStaff = new TabPage();
-            tpAdmin = new TabPage();
             tabControl1.SuspendLayout();
             tpTeacher.SuspendLayout();
             panel4.SuspendLayout();
@@ -77,8 +75,6 @@
             // 
             tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tpTeacher);
-            tabControl1.Controls.Add(tpStaff);
-            tabControl1.Controls.Add(tpAdmin);
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -97,18 +93,16 @@
             tpTeacher.Padding = new Padding(3);
             tpTeacher.Size = new Size(1069, 601);
             tpTeacher.TabIndex = 0;
-            tpTeacher.Text = "Giáo viên";
             tpTeacher.UseVisualStyleBackColor = true;
             // 
             // cbTypeUser
             // 
             cbTypeUser.FormattingEnabled = true;
             cbTypeUser.Items.AddRange(new object[] { "Giáo viên", "Giáo vụ", "Quản trị viên" });
-            cbTypeUser.Location = new Point(355, 63);
+            cbTypeUser.Location = new Point(543, 25);
             cbTypeUser.Name = "cbTypeUser";
             cbTypeUser.Size = new Size(182, 33);
             cbTypeUser.TabIndex = 4;
-            cbTypeUser.SelectedIndex = 0;
             // 
             // panel4
             // 
@@ -319,14 +313,14 @@
             // 
             panel2.Controls.Add(btnSearchUser);
             panel2.Controls.Add(txbSearchUser);
-            panel2.Location = new Point(576, 3);
+            panel2.Location = new Point(732, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(475, 79);
+            panel2.Size = new Size(319, 79);
             panel2.TabIndex = 1;
             // 
             // btnSearchUser
             // 
-            btnSearchUser.Location = new Point(390, 9);
+            btnSearchUser.Location = new Point(231, 9);
             btnSearchUser.Name = "btnSearchUser";
             btnSearchUser.Size = new Size(82, 61);
             btnSearchUser.TabIndex = 3;
@@ -338,7 +332,7 @@
             // 
             txbSearchUser.Location = new Point(31, 24);
             txbSearchUser.Name = "txbSearchUser";
-            txbSearchUser.Size = new Size(332, 31);
+            txbSearchUser.Size = new Size(176, 31);
             txbSearchUser.TabIndex = 1;
             // 
             // panel1
@@ -392,26 +386,6 @@
             btnAddUser.UseVisualStyleBackColor = true;
             btnAddUser.Click += btnAddUser_Click;
             // 
-            // tpStaff
-            // 
-            tpStaff.Location = new Point(4, 34);
-            tpStaff.Name = "tpStaff";
-            tpStaff.Padding = new Padding(3);
-            tpStaff.Size = new Size(1069, 601);
-            tpStaff.TabIndex = 1;
-            tpStaff.Text = "Giáo vụ";
-            tpStaff.UseVisualStyleBackColor = true;
-            // 
-            // tpAdmin
-            // 
-            tpAdmin.Location = new Point(4, 34);
-            tpAdmin.Name = "tpAdmin";
-            tpAdmin.Padding = new Padding(3);
-            tpAdmin.Size = new Size(1069, 601);
-            tpAdmin.TabIndex = 2;
-            tpAdmin.Text = "Quản trị viên";
-            tpAdmin.UseVisualStyleBackColor = true;
-            // 
             // fUser
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -436,8 +410,6 @@
 
         private TabControl tabControl1;
         private TabPage tpTeacher;
-        private TabPage tpStaff;
-        private TabPage tpAdmin;
         private Panel panel4;
         private Panel panel3;
         private DataGridView dtgvUser;

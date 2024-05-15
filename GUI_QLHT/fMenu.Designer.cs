@@ -31,13 +31,14 @@
             btnAcademic = new Button();
             btnUser = new Button();
             btnStudy = new Button();
+            btnStats = new Button();
             SuspendLayout();
             // 
             // btnAcademic
             // 
             btnAcademic.Location = new Point(485, 261);
             btnAcademic.Name = "btnAcademic";
-            btnAcademic.Size = new Size(82, 61);
+            btnAcademic.Size = new Size(154, 61);
             btnAcademic.TabIndex = 4;
             btnAcademic.Text = "Quản lý học vụ";
             btnAcademic.UseVisualStyleBackColor = true;
@@ -48,7 +49,7 @@
             // 
             btnUser.Location = new Point(256, 261);
             btnUser.Name = "btnUser";
-            btnUser.Size = new Size(82, 61);
+            btnUser.Size = new Size(154, 61);
             btnUser.TabIndex = 5;
             btnUser.Text = "Quản lý tài khoản";
             btnUser.UseVisualStyleBackColor = true;
@@ -59,18 +60,30 @@
             // 
             btnStudy.Location = new Point(717, 261);
             btnStudy.Name = "btnStudy";
-            btnStudy.Size = new Size(82, 61);
+            btnStudy.Size = new Size(154, 61);
             btnStudy.TabIndex = 6;
             btnStudy.Text = "Quản lý điểm";
             btnStudy.UseVisualStyleBackColor = true;
             btnStudy.Visible = false;
             btnStudy.Click += btnStudy_Click;
             // 
+            // btnStats
+            // 
+            btnStats.Location = new Point(485, 392);
+            btnStats.Name = "btnStats";
+            btnStats.Size = new Size(154, 61);
+            btnStats.TabIndex = 7;
+            btnStats.Text = "Thống kê";
+            btnStats.UseVisualStyleBackColor = true;
+            btnStats.Visible = false;
+            btnStats.Click += btnStats_Click;
+            // 
             // fMenu
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1055, 583);
+            Controls.Add(btnStats);
             Controls.Add(btnStudy);
             Controls.Add(btnUser);
             Controls.Add(btnAcademic);
@@ -84,5 +97,6 @@
         private Button btnAcademic;
         private Button btnUser;
         private Button btnStudy;
+        private Button btnStats;
     }
 }

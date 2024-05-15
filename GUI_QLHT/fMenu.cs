@@ -33,9 +33,11 @@ namespace GUI_QLHT
                     btnUser.Visible = true;
                     btnAcademic.Visible = true;
                     btnStudy.Visible = true;
+                    btnStats.Visible = true;
                     break;
                 case RoleEnum.STAFF:
                     btnAcademic.Visible = true;
+                    btnStats.Visible = true;
                     break;
                 case RoleEnum.TEACHER:
                     btnStudy.Visible = true;
@@ -64,6 +66,14 @@ namespace GUI_QLHT
             fStudy fStudy = new fStudy();
             this.Hide();
             fStudy.ShowDialog();
+            this.Show();
+        }
+
+        private void btnStats_Click(object sender, EventArgs e)
+        {
+            fStats fStats = new fStats();
+            this.Hide();
+            fStats.ShowDialog();
             this.Show();
         }
     }

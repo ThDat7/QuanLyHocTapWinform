@@ -292,5 +292,15 @@ namespace GUI_QLHT
             }
             else;
         }
+
+        private void btnClassroomDetail_Click(object sender, EventArgs e)
+        {
+            int idClassroom = int.Parse(dtgvClassroom.CurrentRow.Cells[0].Value.ToString());
+            fClassroomManage fcm = new fClassroomManage(idClassroom);
+
+            this.Hide();
+            fcm.ShowDialog();
+            this.Show();
+        }
     }
 }
