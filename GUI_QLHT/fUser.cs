@@ -47,6 +47,18 @@ namespace GUI_QLHT
 
         private void btnSearchUser_Click(object sender, EventArgs e)
         {
+            String kw = txbSearchUser.Text;
+
+            String type = cbTypeUser.Text;
+            RoleEnum role = RoleEnum.TEACHER;
+            if (type == "Giáo viên")
+                role = RoleEnum.TEACHER;
+            else if (type == "Giáo vụ")
+                role = RoleEnum.STAFF;
+            else if (type == "Quản trị viên")
+                role = RoleEnum.ADMIN;
+
+            userList.DataSource = userService.SearchUserByRole(kw, role);
 
         }
 

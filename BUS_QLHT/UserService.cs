@@ -16,6 +16,11 @@ namespace BUS_QLHT
             return userDao.GetUserByRole(role);
         }
 
+        public List<User> SearchUserByRole(String kw, RoleEnum role)
+        {
+            return userDao.SearchUserByRole(kw, role);
+        }
+
         public User Login(String username, String password)
         {
             User user;

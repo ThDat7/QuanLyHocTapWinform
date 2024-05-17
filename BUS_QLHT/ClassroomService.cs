@@ -20,6 +20,11 @@ namespace BUS_QLHT
             return classroomDao.GetClassroomByYear(year);
         }
 
+        public List<Object> SearchByYear(String kw, int year)
+        {
+            return classroomDao.SearchByYear(kw, year);
+        }
+
         public List<int> GetYearsClassroom()
         {
             return classroomDao.GetYearsClassroom();

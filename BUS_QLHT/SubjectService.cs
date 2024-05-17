@@ -17,6 +17,11 @@ namespace BUS_QLHT
             return subjectDao.GetSubjectByGrade(grade);
         }
 
+        public List<Subject> SearchSubjectByGrade(String kw, GradeEnum grade)
+        {
+            return subjectDao.SearchSubjectByGrade(kw, grade);
+        }
+
         public Boolean CreateSubject(Subject subject)
         {
             return subjectDao.CreateSubject(subject);

@@ -15,6 +15,11 @@ namespace BUS_QLHT
             return studentDao.GetStudents();
         }
 
+        public List<Object> SearchStudents(String kw)
+        {
+            return studentDao.SearchStudents(kw);
+        }
+
         public Boolean CreateStudent(Student student)
         {
             return studentDao.CreateStudent(student);

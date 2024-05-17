@@ -61,5 +61,16 @@ namespace DAL_QLHT
                 return query.ToList<Subject>();
             }
         }
+
+        public List<Subject> SearchSubjectByGrade(string kw, GradeEnum grade)
+        {
+            using (db = new student_managementContext())
+            {
+                var query = db.Subjects
+                            .Where(s => s.Grade == grade && s.Name.Contains(kw))
+                            .Select(s => s);
+                return query.ToList<Subject>();
+            }
+        }
     }
 }

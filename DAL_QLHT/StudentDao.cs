@@ -90,5 +90,16 @@ namespace DAL_QLHT
                 return query.ToList<Object>();
             }
         }
+
+        public List<object> SearchStudents(string kw)
+        {
+            using (db = new student_managementContext())
+            {
+                var query = db.Students
+                    .Where(s => (s.LastName + " " + s.FirstName).Contains(kw));
+
+                return query.ToList<Object>();
+            }
+        }
     }
 }

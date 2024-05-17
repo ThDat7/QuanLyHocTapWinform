@@ -26,6 +26,12 @@ namespace BUS_QLHT
             return teacherDao.GetAll();
         }
 
+
+        public List<Object> Search(String kw)
+        {
+            return teacherDao.Search(kw);
+        }
+
         public Object Get(int id) 
         {
             return teacherDao.Get(id);

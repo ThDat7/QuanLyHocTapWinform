@@ -64,7 +64,8 @@ namespace GUI_QLHT
 
         private void btnSearchStudent_Click(object sender, EventArgs e)
         {
-
+            String kw = txbSearchStudent.Text;
+            studentList.DataSource = studentService.SearchStudents(kw);
         }
 
         private Student GetStudent()
@@ -145,7 +146,16 @@ namespace GUI_QLHT
 
         private void btnSearchSubject_Click(object sender, EventArgs e)
         {
-
+            String kw = txbSearchSubject.Text;
+            String gradeText = cbSubjectGrade.Text;
+            GradeEnum grade = GradeEnum.TENTH;
+            if (gradeText == "10")
+                grade = GradeEnum.TENTH;
+            else if (gradeText == "11")
+                grade = GradeEnum.ELEVENTH;
+            else if (gradeText == "12")
+                grade = GradeEnum.TWELVETH;
+            subjectList.DataSource = subjectService.SearchSubjectByGrade(kw, grade);
         }
 
         private Subject GetSubject()
@@ -227,7 +237,9 @@ namespace GUI_QLHT
 
         private void btnSearchClassroom_Click(object sender, EventArgs e)
         {
-
+            int year = int.Parse(cbClassroomYear.Text);
+            String kw = txbSearchClassroom.Text;
+            classroomList.DataSource = classroomService.SearchByYear(kw, year);
         }
 
         private Classroom GetClassroom()

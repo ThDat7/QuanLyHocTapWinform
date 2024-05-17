@@ -108,5 +108,24 @@ namespace DAL_QLHT
                 return rowEffected > 0;
             }
         }
+
+        public List<object> Search(string kw)
+        {
+            using (db = new student_managementContext())
+            {
+                var query = db.Teachers
+                    .Where(t => (t.User.LastName + " " + t.User.FirstName).Contains(kw))
+                    .Select(t => new
+                    {
+                        Id = t.Id,
+                        Name = $"{t.User.LastName} {t.User.FirstName}",
+                        Dob = t.User.Dob,
+                        Sex = t.User.Sex,
+                        Address = t.User.Address
+                    });
+
+                return query.ToList<Object>();
+            }
+        }
     }
 }

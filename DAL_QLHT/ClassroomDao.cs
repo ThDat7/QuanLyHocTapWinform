@@ -211,5 +211,27 @@ namespace DAL_QLHT
             }
         }
 
+        public List<object> SearchByYear(String kw, int year)
+        {
+            using (db = new student_managementContext())
+            {
+                GradeEnum gradeKw = GradeEnum.TENTH;
+                if (kw == "11")
+                    gradeKw = GradeEnum.ELEVENTH;
+                else if (kw == "12")
+                    gradeKw = GradeEnum.TWELVETH;
+
+                var query = db.Classrooms
+                            .Where(c => c.Year == year && c.Grade == gradeKw)
+                            .Select(c => new
+                            {
+                                c.Id,
+                                c.Grade,
+                                c.Order,
+                                c.Year
+                            });
+                return query.ToList<Object>();
+            }
+        }
     }
 }

@@ -71,5 +71,27 @@ namespace DAL_QLHT
                 return db.SaveChanges() > 0;
             }
         }
+
+        public List<User> SearchUserByRole(string kw, RoleEnum role)
+        {
+            using (db = new student_managementContext())
+            {
+                var query = db.Users
+                            .Where(u => u.Role == role && (u.LastName + " " + u.FirstName).Contains(kw))
+                            .Select(u => new User()
+                            {
+                                Id = u.Id,
+                                Username = u.Username,
+                                LastName = u.LastName,
+                                FirstName = u.FirstName,
+                                Dob = u.Dob,
+                                Sex = u.Sex,
+                                Address = u.Address,
+                                Phone = u.Phone,
+                                Email = u.Email
+                            });
+                return query.ToList<User>();
+            }
+        }
     }
 }
