@@ -35,8 +35,16 @@
             btnSearchStudent = new Button();
             txbSearchStudent = new TextBox();
             dtgvSearchStudent = new DataGridView();
+            studentSearchId = new DataGridViewTextBoxColumn();
+            studentSearchName = new DataGridViewTextBoxColumn();
+            studentSearchDob = new DataGridViewTextBoxColumn();
+            studentSearchAddress = new DataGridViewTextBoxColumn();
             btnSaveSe1 = new Button();
             dtgvStudentInClass = new DataGridView();
+            StudentId = new DataGridViewTextBoxColumn();
+            studentName = new DataGridViewTextBoxColumn();
+            studentDob = new DataGridViewTextBoxColumn();
+            studentAddress = new DataGridViewTextBoxColumn();
             tabPage2 = new TabPage();
             txbHomeroomAddress = new TextBox();
             txbHomeroomDob = new TextBox();
@@ -48,6 +56,10 @@
             txbSearchHomeroomTeacher = new TextBox();
             btnSetHomeroom = new Button();
             dtgvSearchTeacher1 = new DataGridView();
+            homeroomId = new DataGridViewTextBoxColumn();
+            homeroomName = new DataGridViewTextBoxColumn();
+            homeroomDob = new DataGridViewTextBoxColumn();
+            homeroomAddress = new DataGridViewTextBoxColumn();
             tabPage3 = new TabPage();
             cbSubject = new ComboBox();
             btnRemoveTeacher = new Button();
@@ -55,21 +67,15 @@
             btnSearchTeacher2 = new Button();
             txbSearchSubjectTeacher = new TextBox();
             dtgvSearchTeacher2 = new DataGridView();
-            btnLockClassroom = new Button();
-            dtgvSubjectTeachers = new DataGridView();
-            StudentId = new DataGridViewTextBoxColumn();
-            studentName = new DataGridViewTextBoxColumn();
-            studentDob = new DataGridViewTextBoxColumn();
-            studentAddress = new DataGridViewTextBoxColumn();
-            homeroomId = new DataGridViewTextBoxColumn();
-            homeroomName = new DataGridViewTextBoxColumn();
-            homeroomDob = new DataGridViewTextBoxColumn();
-            homeroomAddress = new DataGridViewTextBoxColumn();
             searchId = new DataGridViewTextBoxColumn();
             searchName = new DataGridViewTextBoxColumn();
             searchDob = new DataGridViewTextBoxColumn();
             searchAddress = new DataGridViewTextBoxColumn();
+            btnLockClassroom = new Button();
+            dtgvSubjectTeachers = new DataGridView();
             SubjectTeacherId = new DataGridViewTextBoxColumn();
+            SubjectId = new DataGridViewTextBoxColumn();
+            SubjectName = new DataGridViewTextBoxColumn();
             subjectTeacherName = new DataGridViewTextBoxColumn();
             subjectTeacherDob = new DataGridViewTextBoxColumn();
             subjectTeacherAddress = new DataGridViewTextBoxColumn();
@@ -157,12 +163,45 @@
             dtgvSearchStudent.AllowUserToResizeRows = false;
             dtgvSearchStudent.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
             dtgvSearchStudent.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvSearchStudent.Columns.AddRange(new DataGridViewColumn[] { studentSearchId, studentSearchName, studentSearchDob, studentSearchAddress });
             dtgvSearchStudent.Location = new Point(679, 113);
             dtgvSearchStudent.Name = "dtgvSearchStudent";
             dtgvSearchStudent.RowHeadersWidth = 62;
             dtgvSearchStudent.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dtgvSearchStudent.Size = new Size(386, 467);
             dtgvSearchStudent.TabIndex = 18;
+            // 
+            // studentSearchId
+            // 
+            studentSearchId.DataPropertyName = "Id";
+            studentSearchId.HeaderText = "Mã";
+            studentSearchId.MinimumWidth = 8;
+            studentSearchId.Name = "studentSearchId";
+            studentSearchId.Width = 150;
+            // 
+            // studentSearchName
+            // 
+            studentSearchName.DataPropertyName = "name";
+            studentSearchName.HeaderText = "Tên";
+            studentSearchName.MinimumWidth = 8;
+            studentSearchName.Name = "studentSearchName";
+            studentSearchName.Width = 150;
+            // 
+            // studentSearchDob
+            // 
+            studentSearchDob.DataPropertyName = "Dob";
+            studentSearchDob.HeaderText = "Ngày sinh";
+            studentSearchDob.MinimumWidth = 8;
+            studentSearchDob.Name = "studentSearchDob";
+            studentSearchDob.Width = 150;
+            // 
+            // studentSearchAddress
+            // 
+            studentSearchAddress.DataPropertyName = "Address";
+            studentSearchAddress.HeaderText = "Address";
+            studentSearchAddress.MinimumWidth = 8;
+            studentSearchAddress.Name = "studentSearchAddress";
+            studentSearchAddress.Width = 150;
             // 
             // btnSaveSe1
             // 
@@ -186,6 +225,38 @@
             dtgvStudentInClass.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dtgvStudentInClass.Size = new Size(616, 473);
             dtgvStudentInClass.TabIndex = 14;
+            // 
+            // StudentId
+            // 
+            StudentId.DataPropertyName = "Id";
+            StudentId.HeaderText = "Mã";
+            StudentId.MinimumWidth = 8;
+            StudentId.Name = "StudentId";
+            StudentId.Width = 150;
+            // 
+            // studentName
+            // 
+            studentName.DataPropertyName = "name";
+            studentName.HeaderText = "Tên";
+            studentName.MinimumWidth = 8;
+            studentName.Name = "studentName";
+            studentName.Width = 150;
+            // 
+            // studentDob
+            // 
+            studentDob.DataPropertyName = "Dob";
+            studentDob.HeaderText = "Ngày sinh";
+            studentDob.MinimumWidth = 8;
+            studentDob.Name = "studentDob";
+            studentDob.Width = 150;
+            // 
+            // studentAddress
+            // 
+            studentAddress.DataPropertyName = "Address";
+            studentAddress.HeaderText = "Địa chỉ";
+            studentAddress.MinimumWidth = 8;
+            studentAddress.Name = "studentAddress";
+            studentAddress.Width = 150;
             // 
             // tabPage2
             // 
@@ -302,6 +373,38 @@
             dtgvSearchTeacher1.Size = new Size(1053, 443);
             dtgvSearchTeacher1.TabIndex = 18;
             // 
+            // homeroomId
+            // 
+            homeroomId.DataPropertyName = "Id";
+            homeroomId.HeaderText = "Mã";
+            homeroomId.MinimumWidth = 8;
+            homeroomId.Name = "homeroomId";
+            homeroomId.Width = 150;
+            // 
+            // homeroomName
+            // 
+            homeroomName.DataPropertyName = "Name";
+            homeroomName.HeaderText = "Tên";
+            homeroomName.MinimumWidth = 8;
+            homeroomName.Name = "homeroomName";
+            homeroomName.Width = 150;
+            // 
+            // homeroomDob
+            // 
+            homeroomDob.DataPropertyName = "Dob";
+            homeroomDob.HeaderText = "Ngày sinh";
+            homeroomDob.MinimumWidth = 8;
+            homeroomDob.Name = "homeroomDob";
+            homeroomDob.Width = 150;
+            // 
+            // homeroomAddress
+            // 
+            homeroomAddress.DataPropertyName = "Address";
+            homeroomAddress.HeaderText = "Địa chỉ";
+            homeroomAddress.MinimumWidth = 8;
+            homeroomAddress.Name = "homeroomAddress";
+            homeroomAddress.Width = 150;
+            // 
             // tabPage3
             // 
             tabPage3.Controls.Add(cbSubject);
@@ -382,96 +485,6 @@
             dtgvSearchTeacher2.Size = new Size(386, 482);
             dtgvSearchTeacher2.TabIndex = 23;
             // 
-            // btnLockClassroom
-            // 
-            btnLockClassroom.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnLockClassroom.ForeColor = SystemColors.HotTrack;
-            btnLockClassroom.Location = new Point(146, 18);
-            btnLockClassroom.Name = "btnLockClassroom";
-            btnLockClassroom.Size = new Size(146, 56);
-            btnLockClassroom.TabIndex = 22;
-            btnLockClassroom.Text = "Khóa sửa điểm";
-            btnLockClassroom.UseVisualStyleBackColor = true;
-            btnLockClassroom.Click += btnLockClassroom_Click;
-            // 
-            // dtgvSubjectTeachers
-            // 
-            dtgvSubjectTeachers.AllowUserToResizeColumns = false;
-            dtgvSubjectTeachers.AllowUserToResizeRows = false;
-            dtgvSubjectTeachers.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
-            dtgvSubjectTeachers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvSubjectTeachers.Columns.AddRange(new DataGridViewColumn[] { SubjectTeacherId, subjectTeacherName, subjectTeacherDob, subjectTeacherAddress });
-            dtgvSubjectTeachers.Location = new Point(0, 103);
-            dtgvSubjectTeachers.Name = "dtgvSubjectTeachers";
-            dtgvSubjectTeachers.RowHeadersWidth = 62;
-            dtgvSubjectTeachers.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dtgvSubjectTeachers.Size = new Size(596, 478);
-            dtgvSubjectTeachers.TabIndex = 21;
-            // 
-            // StudentId
-            // 
-            StudentId.DataPropertyName = "Id";
-            StudentId.HeaderText = "Mã";
-            StudentId.MinimumWidth = 8;
-            StudentId.Name = "StudentId";
-            StudentId.Width = 150;
-            // 
-            // studentName
-            // 
-            studentName.DataPropertyName = "name";
-            studentName.HeaderText = "Tên";
-            studentName.MinimumWidth = 8;
-            studentName.Name = "studentName";
-            studentName.Width = 150;
-            // 
-            // studentDob
-            // 
-            studentDob.DataPropertyName = "Dob";
-            studentDob.HeaderText = "Ngày sinh";
-            studentDob.MinimumWidth = 8;
-            studentDob.Name = "studentDob";
-            studentDob.Width = 150;
-            // 
-            // studentAddress
-            // 
-            studentAddress.DataPropertyName = "Address";
-            studentAddress.HeaderText = "Địa chỉ";
-            studentAddress.MinimumWidth = 8;
-            studentAddress.Name = "studentAddress";
-            studentAddress.Width = 150;
-            // 
-            // homeroomId
-            // 
-            homeroomId.DataPropertyName = "Id";
-            homeroomId.HeaderText = "Mã";
-            homeroomId.MinimumWidth = 8;
-            homeroomId.Name = "homeroomId";
-            homeroomId.Width = 150;
-            // 
-            // homeroomName
-            // 
-            homeroomName.DataPropertyName = "Name";
-            homeroomName.HeaderText = "Tên";
-            homeroomName.MinimumWidth = 8;
-            homeroomName.Name = "homeroomName";
-            homeroomName.Width = 150;
-            // 
-            // homeroomDob
-            // 
-            homeroomDob.DataPropertyName = "Dob";
-            homeroomDob.HeaderText = "Ngày sinh";
-            homeroomDob.MinimumWidth = 8;
-            homeroomDob.Name = "homeroomDob";
-            homeroomDob.Width = 150;
-            // 
-            // homeroomAddress
-            // 
-            homeroomAddress.DataPropertyName = "Address";
-            homeroomAddress.HeaderText = "Địa chỉ";
-            homeroomAddress.MinimumWidth = 8;
-            homeroomAddress.Name = "homeroomAddress";
-            homeroomAddress.Width = 150;
-            // 
             // searchId
             // 
             searchId.DataPropertyName = "Id";
@@ -504,13 +517,56 @@
             searchAddress.Name = "searchAddress";
             searchAddress.Width = 150;
             // 
+            // btnLockClassroom
+            // 
+            btnLockClassroom.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnLockClassroom.ForeColor = SystemColors.HotTrack;
+            btnLockClassroom.Location = new Point(146, 18);
+            btnLockClassroom.Name = "btnLockClassroom";
+            btnLockClassroom.Size = new Size(146, 56);
+            btnLockClassroom.TabIndex = 22;
+            btnLockClassroom.Text = "Khóa sửa điểm";
+            btnLockClassroom.UseVisualStyleBackColor = true;
+            btnLockClassroom.Click += btnLockClassroom_Click;
+            // 
+            // dtgvSubjectTeachers
+            // 
+            dtgvSubjectTeachers.AllowUserToResizeColumns = false;
+            dtgvSubjectTeachers.AllowUserToResizeRows = false;
+            dtgvSubjectTeachers.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
+            dtgvSubjectTeachers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvSubjectTeachers.Columns.AddRange(new DataGridViewColumn[] { SubjectTeacherId, SubjectId, SubjectName, subjectTeacherName, subjectTeacherDob, subjectTeacherAddress });
+            dtgvSubjectTeachers.Location = new Point(0, 103);
+            dtgvSubjectTeachers.Name = "dtgvSubjectTeachers";
+            dtgvSubjectTeachers.RowHeadersWidth = 62;
+            dtgvSubjectTeachers.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dtgvSubjectTeachers.Size = new Size(596, 478);
+            dtgvSubjectTeachers.TabIndex = 21;
+            // 
             // SubjectTeacherId
             // 
-            SubjectTeacherId.DataPropertyName = "Id";
+            SubjectTeacherId.DataPropertyName = "TeacherId";
             SubjectTeacherId.HeaderText = "Mã";
             SubjectTeacherId.MinimumWidth = 8;
             SubjectTeacherId.Name = "SubjectTeacherId";
             SubjectTeacherId.Width = 150;
+            // 
+            // SubjectId
+            // 
+            SubjectId.DataPropertyName = "SubjectId";
+            SubjectId.HeaderText = "Mã môn";
+            SubjectId.MinimumWidth = 8;
+            SubjectId.Name = "SubjectId";
+            SubjectId.Visible = false;
+            SubjectId.Width = 150;
+            // 
+            // SubjectName
+            // 
+            SubjectName.DataPropertyName = "SubjectName";
+            SubjectName.HeaderText = "Môn học";
+            SubjectName.MinimumWidth = 8;
+            SubjectName.Name = "SubjectName";
+            SubjectName.Width = 150;
             // 
             // subjectTeacherName
             // 
@@ -609,9 +665,15 @@
         private DataGridViewTextBoxColumn searchName;
         private DataGridViewTextBoxColumn searchDob;
         private DataGridViewTextBoxColumn searchAddress;
+        private DataGridViewTextBoxColumn studentSearchId;
+        private DataGridViewTextBoxColumn studentSearchName;
+        private DataGridViewTextBoxColumn studentSearchDob;
+        private DataGridViewTextBoxColumn studentSearchAddress;
         private DataGridViewTextBoxColumn SubjectTeacherId;
+        private DataGridViewTextBoxColumn SubjectName;
         private DataGridViewTextBoxColumn subjectTeacherName;
         private DataGridViewTextBoxColumn subjectTeacherDob;
         private DataGridViewTextBoxColumn subjectTeacherAddress;
+        private DataGridViewTextBoxColumn SubjectId;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DTO_QLHT;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,14 +35,14 @@ namespace DAL_QLHT
             }
         }
 
-        public List<Object> Search(string keyword, int subjectId)
+        public List<Object> Search(string keyword, int? subjectId)
         {
             using (db = new student_managementContext())
             {
                 var query = db.Teachers
                             .Where(t =>
                                 (t.User.LastName + " " + t.User.FirstName)
-                                    .Contains(keyword))
+                                    .Contains(keyword) && (subjectId == null || t.Subjects.Any(s => s.Id == subjectId)))
                             .Select(t => new
                             {
                                 Id = t.Id,
@@ -51,6 +52,60 @@ namespace DAL_QLHT
                             });
 
                 return query.ToList<Object>();
+            }
+        }
+
+        public List<Object> GetAll()
+        {
+            using(db = new student_managementContext())
+            {
+                var query = db.Teachers
+                    .Select(t => new
+                    {
+                        Id = t.Id,
+                        Name = $"{t.User.LastName} {t.User.FirstName}",
+                        Dob = t.User.Dob,
+                        Sex = t.User.Sex,
+                        Address = t.User.Address
+                    });
+
+                return query.ToList<Object>();
+            }
+        }
+
+        public Object Get(int id)
+        {
+            using (db = new student_managementContext())
+            {
+                var query = db.Teachers
+                    .Include("Subjects")
+                    .Where(t => t.Id == id);
+
+                return query.FirstOrDefault<Object>();
+            }
+        }
+
+        public Boolean AssignSubject(int teacherId, int subjectId)
+        {
+            using (var db = new student_managementContext())
+            {
+                string sql = $"INSERT INTO SubjectTeacher " +
+                            $"(SubjectsId, TeachersId) " +
+                            $"VALUES ({subjectId}, {teacherId})";
+                int rowEffected = db.Database.ExecuteSqlRaw(sql);
+                return rowEffected > 0;
+            }
+        }
+
+        public bool RemoveSubjectToTeacher(int teacherId, int subjectId)
+        {
+            using (var db = new student_managementContext())
+            {
+                string sql = $"DELETE FROM SubjectTeacher " +
+                            $"WHERE TeachersId={teacherId} AND " +
+                            $"SubjectsId={subjectId}";
+                int rowEffected = db.Database.ExecuteSqlRaw(sql);
+                return rowEffected > 0;
             }
         }
     }

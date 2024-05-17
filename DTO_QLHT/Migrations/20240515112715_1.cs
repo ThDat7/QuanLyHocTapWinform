@@ -106,6 +106,30 @@ namespace DTO_QLHT.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SubjectTeacher",
+                columns: table => new
+                {
+                    SubjectsId = table.Column<int>(type: "int", nullable: false),
+                    TeachersId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubjectTeacher", x => new { x.SubjectsId, x.TeachersId });
+                    table.ForeignKey(
+                        name: "FK_SubjectTeacher_Subjects_SubjectsId",
+                        column: x => x.SubjectsId,
+                        principalTable: "Subjects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SubjectTeacher_Teachers_TeachersId",
+                        column: x => x.TeachersId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ClassroomStudent",
                 columns: table => new
                 {
@@ -278,6 +302,11 @@ namespace DTO_QLHT.Migrations
                 column: "SubjectGradeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SubjectTeacher_TeachersId",
+                table: "SubjectTeacher",
+                column: "TeachersId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Teachers_UserId",
                 table: "Teachers",
                 column: "UserId");
@@ -309,6 +338,9 @@ namespace DTO_QLHT.Migrations
 
             migrationBuilder.DropTable(
                 name: "NormalGrades");
+
+            migrationBuilder.DropTable(
+                name: "SubjectTeacher");
 
             migrationBuilder.DropTable(
                 name: "SubjectGradeSemesters");

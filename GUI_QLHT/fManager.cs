@@ -17,10 +17,12 @@ namespace GUI_QLHT
         BindingSource studentList = new BindingSource();
         BindingSource subjectList = new BindingSource();
         BindingSource classroomList = new BindingSource();
+        BindingSource teacherList = new BindingSource();
 
         StudentService studentService = new StudentService();
         SubjectService subjectService = new SubjectService();
         ClassroomService classroomService = new ClassroomService();
+        TeacherService teacherService = new TeacherService();
 
         public fManager()
         {
@@ -43,6 +45,8 @@ namespace GUI_QLHT
             LoadClassroom();
             AddClassroomBinding();
 
+            dtgvTeacher.DataSource = teacherList;
+            LoadTeacher();
         }
 
         // student
@@ -86,6 +90,12 @@ namespace GUI_QLHT
         {
             List<Object> students = studentService.GetStudents();
             studentList.DataSource = students;
+        }
+
+        private void LoadTeacher()
+        {
+            List<Object> teachers = teacherService.GetAll();
+            teacherList.DataSource = teachers;
         }
 
         private void btnShowStudent_Click(object sender, EventArgs e)
@@ -300,6 +310,16 @@ namespace GUI_QLHT
 
             this.Hide();
             fcm.ShowDialog();
+            this.Show();
+        }
+
+        private void btnAssignSubject_Click(object sender, EventArgs e)
+        {
+            int idTeacher = int.Parse(dtgvTeacher.CurrentRow.Cells[0].Value.ToString());
+            fAssignSubject fas = new fAssignSubject(idTeacher);
+
+            this.Hide();
+            fas.ShowDialog();
             this.Show();
         }
     }

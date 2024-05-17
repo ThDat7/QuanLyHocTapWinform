@@ -83,19 +83,20 @@ namespace DAL_QLHT
         {
             using(db = new student_managementContext())
             {
-                Teach t = new Teach() { ClassroomId = classroomId, TeacherId = teacherId, SubjectId = subjectId };
-                db.Teaches.Add(t);
-                db.SaveChanges();
-                return t.Id;
+                string sql = $"INSERT INTO Teaches " +
+                            $"(ClassroomId, TeacherId, SubjectId) " +
+                            $"VALUES ({classroomId}, {teacherId}, {subjectId})";
+                int rowEffected = db.Database.ExecuteSqlRaw(sql);
+                return rowEffected;
             }
         }
 
-        public Boolean RemoveTeach(int teachId)
+        public Boolean RemoveTeach(int teachId, int subjectId)
         {
             using (db = new student_managementContext())
             {
                 string sql = $"DELETE FROM Teaches " +
-                            $"WHERE Id={teachId}";
+                            $"WHERE TeacherId={teachId} AND SubjectId={subjectId}";
                 int rowEffected = db.Database.ExecuteSqlRaw(sql);
                 return rowEffected > 0;
             }

@@ -113,7 +113,8 @@ namespace DAL_QLHT
                             where teach.ClassroomId == id
                             select new
                             {
-                                Id = teacher.Id,
+                                TeacherId = teacher.Id,
+                                SubjectId = subject.Id,
                                 SubjectName = subject.Name,
                                 Name = $"{teacher.User.LastName} {teacher.User.FirstName}",
                                 Dob = teacher.User.Dob,

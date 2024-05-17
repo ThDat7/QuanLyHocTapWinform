@@ -15,4 +15,5 @@ public class Subject
 
     //[Required]
     public GradeEnum Grade { get; set; }
+    public virtual List<Teacher> Teachers { get; set; }
 }

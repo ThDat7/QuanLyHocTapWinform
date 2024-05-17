@@ -30,6 +30,15 @@
         {
             panel3 = new Panel();
             dtgvStudent = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            LastName = new DataGridViewTextBoxColumn();
+            FirstName = new DataGridViewTextBoxColumn();
+            Dob = new DataGridViewTextBoxColumn();
+            Sex = new DataGridViewTextBoxColumn();
+            Address = new DataGridViewTextBoxColumn();
+            Email = new DataGridViewTextBoxColumn();
+            Phone = new DataGridViewTextBoxColumn();
+            Classrooms = new DataGridViewTextBoxColumn();
             panel2 = new Panel();
             btnSearchStudent = new Button();
             txbSearchStudent = new TextBox();
@@ -53,6 +62,10 @@
             cbClassroomYear = new ComboBox();
             panel12 = new Panel();
             dtgvClassroom = new DataGridView();
+            classroomId = new DataGridViewTextBoxColumn();
+            classroomGrade = new DataGridViewTextBoxColumn();
+            classroomOrder = new DataGridViewTextBoxColumn();
+            classroomYear = new DataGridViewTextBoxColumn();
             panel9 = new Panel();
             btnClassroomDetail = new Button();
             txbClassroomYear = new TextBox();
@@ -83,6 +96,9 @@
             cbSubjectGrade = new ComboBox();
             panel8 = new Panel();
             dtgvSubject = new DataGridView();
+            subjetId = new DataGridViewTextBoxColumn();
+            subjectName = new DataGridViewTextBoxColumn();
+            subjectGrade = new DataGridViewTextBoxColumn();
             panel5 = new Panel();
             btnShowSubject = new Button();
             btnDeleteSubject = new Button();
@@ -98,22 +114,14 @@
             panel7 = new Panel();
             btnSearchSubject = new Button();
             txbSearchSubject = new TextBox();
-            Id = new DataGridViewTextBoxColumn();
-            LastName = new DataGridViewTextBoxColumn();
-            FirstName = new DataGridViewTextBoxColumn();
-            Dob = new DataGridViewTextBoxColumn();
-            Sex = new DataGridViewTextBoxColumn();
-            Address = new DataGridViewTextBoxColumn();
-            Email = new DataGridViewTextBoxColumn();
-            Phone = new DataGridViewTextBoxColumn();
-            Classrooms = new DataGridViewTextBoxColumn();
-            subjetId = new DataGridViewTextBoxColumn();
-            subjectName = new DataGridViewTextBoxColumn();
-            subjectGrade = new DataGridViewTextBoxColumn();
-            classroomId = new DataGridViewTextBoxColumn();
-            classroomGrade = new DataGridViewTextBoxColumn();
-            classroomOrder = new DataGridViewTextBoxColumn();
-            classroomYear = new DataGridViewTextBoxColumn();
+            tpTeacher = new TabPage();
+            dtgvTeacher = new DataGridView();
+            btnAssignSubject = new Button();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtgvStudent).BeginInit();
             panel2.SuspendLayout();
@@ -133,6 +141,8 @@
             panel5.SuspendLayout();
             panel6.SuspendLayout();
             panel7.SuspendLayout();
+            tpTeacher.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dtgvTeacher).BeginInit();
             SuspendLayout();
             // 
             // panel3
@@ -153,6 +163,78 @@
             dtgvStudent.RowHeadersWidth = 62;
             dtgvStudent.Size = new Size(537, 496);
             dtgvStudent.TabIndex = 3;
+            // 
+            // Id
+            // 
+            Id.DataPropertyName = "Id";
+            Id.HeaderText = "Mã";
+            Id.MinimumWidth = 8;
+            Id.Name = "Id";
+            Id.Width = 150;
+            // 
+            // LastName
+            // 
+            LastName.DataPropertyName = "LastName";
+            LastName.HeaderText = "Họ";
+            LastName.MinimumWidth = 8;
+            LastName.Name = "LastName";
+            LastName.Width = 150;
+            // 
+            // FirstName
+            // 
+            FirstName.DataPropertyName = "FirstName";
+            FirstName.HeaderText = "Tên";
+            FirstName.MinimumWidth = 8;
+            FirstName.Name = "FirstName";
+            FirstName.Width = 150;
+            // 
+            // Dob
+            // 
+            Dob.DataPropertyName = "Dob";
+            Dob.HeaderText = "Ngày sinh";
+            Dob.MinimumWidth = 8;
+            Dob.Name = "Dob";
+            Dob.Width = 150;
+            // 
+            // Sex
+            // 
+            Sex.DataPropertyName = "Sex";
+            Sex.HeaderText = "Giới tính";
+            Sex.MinimumWidth = 8;
+            Sex.Name = "Sex";
+            Sex.Width = 150;
+            // 
+            // Address
+            // 
+            Address.DataPropertyName = "Address";
+            Address.HeaderText = "Địa chỉ";
+            Address.MinimumWidth = 8;
+            Address.Name = "Address";
+            Address.Width = 150;
+            // 
+            // Email
+            // 
+            Email.DataPropertyName = "Email";
+            Email.HeaderText = "Email";
+            Email.MinimumWidth = 8;
+            Email.Name = "Email";
+            Email.Width = 150;
+            // 
+            // Phone
+            // 
+            Phone.DataPropertyName = "Phone";
+            Phone.HeaderText = "Số điện thoại";
+            Phone.MinimumWidth = 8;
+            Phone.Name = "Phone";
+            Phone.Width = 150;
+            // 
+            // Classrooms
+            // 
+            Classrooms.DataPropertyName = "Classrooms";
+            Classrooms.HeaderText = "Lớp học";
+            Classrooms.MinimumWidth = 8;
+            Classrooms.Name = "Classrooms";
+            Classrooms.Width = 150;
             // 
             // panel2
             // 
@@ -363,6 +445,38 @@
             dtgvClassroom.RowHeadersWidth = 62;
             dtgvClassroom.Size = new Size(534, 503);
             dtgvClassroom.TabIndex = 3;
+            // 
+            // classroomId
+            // 
+            classroomId.DataPropertyName = "Id";
+            classroomId.HeaderText = "Mã";
+            classroomId.MinimumWidth = 8;
+            classroomId.Name = "classroomId";
+            classroomId.Width = 150;
+            // 
+            // classroomGrade
+            // 
+            classroomGrade.DataPropertyName = "Grade";
+            classroomGrade.HeaderText = "Khối";
+            classroomGrade.MinimumWidth = 8;
+            classroomGrade.Name = "classroomGrade";
+            classroomGrade.Width = 150;
+            // 
+            // classroomOrder
+            // 
+            classroomOrder.DataPropertyName = "Order";
+            classroomOrder.HeaderText = "Thứ tự";
+            classroomOrder.MinimumWidth = 8;
+            classroomOrder.Name = "classroomOrder";
+            classroomOrder.Width = 150;
+            // 
+            // classroomYear
+            // 
+            classroomYear.DataPropertyName = "Year";
+            classroomYear.HeaderText = "Năm học";
+            classroomYear.MinimumWidth = 8;
+            classroomYear.Name = "classroomYear";
+            classroomYear.Width = 150;
             // 
             // panel9
             // 
@@ -613,6 +727,7 @@
             tabControl1.Controls.Add(tpStudent);
             tabControl1.Controls.Add(tpSubject);
             tabControl1.Controls.Add(tpClassroom);
+            tabControl1.Controls.Add(tpTeacher);
             tabControl1.Location = new Point(0, 1);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -661,6 +776,30 @@
             dtgvSubject.RowHeadersWidth = 62;
             dtgvSubject.Size = new Size(538, 496);
             dtgvSubject.TabIndex = 6;
+            // 
+            // subjetId
+            // 
+            subjetId.DataPropertyName = "Id";
+            subjetId.HeaderText = "Mã";
+            subjetId.MinimumWidth = 8;
+            subjetId.Name = "subjetId";
+            subjetId.Width = 150;
+            // 
+            // subjectName
+            // 
+            subjectName.DataPropertyName = "Name";
+            subjectName.HeaderText = "Tên môn";
+            subjectName.MinimumWidth = 8;
+            subjectName.Name = "subjectName";
+            subjectName.Width = 150;
+            // 
+            // subjectGrade
+            // 
+            subjectGrade.DataPropertyName = "Grade";
+            subjectGrade.HeaderText = "Khối";
+            subjectGrade.MinimumWidth = 8;
+            subjectGrade.Name = "subjectGrade";
+            subjectGrade.Width = 150;
             // 
             // panel5
             // 
@@ -801,133 +940,77 @@
             txbSearchSubject.Size = new Size(170, 31);
             txbSearchSubject.TabIndex = 1;
             // 
-            // Id
+            // tpTeacher
             // 
-            Id.DataPropertyName = "Id";
-            Id.HeaderText = "Mã";
-            Id.MinimumWidth = 8;
-            Id.Name = "Id";
-            Id.Width = 150;
+            tpTeacher.Controls.Add(dtgvTeacher);
+            tpTeacher.Controls.Add(btnAssignSubject);
+            tpTeacher.Location = new Point(4, 34);
+            tpTeacher.Name = "tpTeacher";
+            tpTeacher.Size = new Size(1069, 601);
+            tpTeacher.TabIndex = 3;
+            tpTeacher.Text = "Giáo viên";
+            tpTeacher.UseVisualStyleBackColor = true;
             // 
-            // LastName
+            // dtgvTeacher
             // 
-            LastName.DataPropertyName = "LastName";
-            LastName.HeaderText = "Họ";
-            LastName.MinimumWidth = 8;
-            LastName.Name = "LastName";
-            LastName.Width = 150;
+            dtgvTeacher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvTeacher.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
+            dtgvTeacher.Dock = DockStyle.Bottom;
+            dtgvTeacher.Location = new Point(0, 108);
+            dtgvTeacher.Name = "dtgvTeacher";
+            dtgvTeacher.RowHeadersWidth = 62;
+            dtgvTeacher.Size = new Size(1069, 493);
+            dtgvTeacher.TabIndex = 11;
             // 
-            // FirstName
+            // btnAssignSubject
             // 
-            FirstName.DataPropertyName = "FirstName";
-            FirstName.HeaderText = "Tên";
-            FirstName.MinimumWidth = 8;
-            FirstName.Name = "FirstName";
-            FirstName.Width = 150;
+            btnAssignSubject.Location = new Point(402, 19);
+            btnAssignSubject.Name = "btnAssignSubject";
+            btnAssignSubject.Size = new Size(288, 67);
+            btnAssignSubject.TabIndex = 10;
+            btnAssignSubject.Text = "Phân công giảng dạy";
+            btnAssignSubject.UseVisualStyleBackColor = true;
+            btnAssignSubject.Click += btnAssignSubject_Click;
             // 
-            // Dob
+            // dataGridViewTextBoxColumn1
             // 
-            Dob.DataPropertyName = "Dob";
-            Dob.HeaderText = "Ngày sinh";
-            Dob.MinimumWidth = 8;
-            Dob.Name = "Dob";
-            Dob.Width = 150;
+            dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn1.HeaderText = "Mã";
+            dataGridViewTextBoxColumn1.MinimumWidth = 8;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.Width = 150;
             // 
-            // Sex
+            // dataGridViewTextBoxColumn3
             // 
-            Sex.DataPropertyName = "Sex";
-            Sex.HeaderText = "Giới tính";
-            Sex.MinimumWidth = 8;
-            Sex.Name = "Sex";
-            Sex.Width = 150;
+            dataGridViewTextBoxColumn3.DataPropertyName = "Name";
+            dataGridViewTextBoxColumn3.HeaderText = "Tên";
+            dataGridViewTextBoxColumn3.MinimumWidth = 8;
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Width = 150;
             // 
-            // Address
+            // dataGridViewTextBoxColumn4
             // 
-            Address.DataPropertyName = "Address";
-            Address.HeaderText = "Địa chỉ";
-            Address.MinimumWidth = 8;
-            Address.Name = "Address";
-            Address.Width = 150;
+            dataGridViewTextBoxColumn4.DataPropertyName = "Dob";
+            dataGridViewTextBoxColumn4.HeaderText = "Ngày sinh";
+            dataGridViewTextBoxColumn4.MinimumWidth = 8;
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.Width = 150;
             // 
-            // Email
+            // dataGridViewTextBoxColumn5
             // 
-            Email.DataPropertyName = "Email";
-            Email.HeaderText = "Email";
-            Email.MinimumWidth = 8;
-            Email.Name = "Email";
-            Email.Width = 150;
+            dataGridViewTextBoxColumn5.DataPropertyName = "Sex";
+            dataGridViewTextBoxColumn5.HeaderText = "Giới tính";
+            dataGridViewTextBoxColumn5.MinimumWidth = 8;
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.Width = 150;
             // 
-            // Phone
+            // dataGridViewTextBoxColumn6
             // 
-            Phone.DataPropertyName = "Phone";
-            Phone.HeaderText = "Số điện thoại";
-            Phone.MinimumWidth = 8;
-            Phone.Name = "Phone";
-            Phone.Width = 150;
-            // 
-            // Classrooms
-            // 
-            Classrooms.DataPropertyName = "Classrooms";
-            Classrooms.HeaderText = "Lớp học";
-            Classrooms.MinimumWidth = 8;
-            Classrooms.Name = "Classrooms";
-            Classrooms.Width = 150;
-            // 
-            // subjetId
-            // 
-            subjetId.DataPropertyName = "Id";
-            subjetId.HeaderText = "Mã";
-            subjetId.MinimumWidth = 8;
-            subjetId.Name = "subjetId";
-            subjetId.Width = 150;
-            // 
-            // subjectName
-            // 
-            subjectName.DataPropertyName = "Name";
-            subjectName.HeaderText = "Tên môn";
-            subjectName.MinimumWidth = 8;
-            subjectName.Name = "subjectName";
-            subjectName.Width = 150;
-            // 
-            // subjectGrade
-            // 
-            subjectGrade.DataPropertyName = "Grade";
-            subjectGrade.HeaderText = "Khối";
-            subjectGrade.MinimumWidth = 8;
-            subjectGrade.Name = "subjectGrade";
-            subjectGrade.Width = 150;
-            // 
-            // classroomId
-            // 
-            classroomId.DataPropertyName = "Id";
-            classroomId.HeaderText = "Mã";
-            classroomId.MinimumWidth = 8;
-            classroomId.Name = "classroomId";
-            classroomId.Width = 150;
-            // 
-            // classroomGrade
-            // 
-            classroomGrade.DataPropertyName = "Grade";
-            classroomGrade.HeaderText = "Khối";
-            classroomGrade.MinimumWidth = 8;
-            classroomGrade.Name = "classroomGrade";
-            classroomGrade.Width = 150;
-            // 
-            // classroomOrder
-            // 
-            classroomOrder.DataPropertyName = "Order";
-            classroomOrder.HeaderText = "Thứ tự";
-            classroomOrder.MinimumWidth = 8;
-            classroomOrder.Name = "classroomOrder";
-            classroomOrder.Width = 150;
-            // 
-            // classroomYear
-            // 
-            classroomYear.DataPropertyName = "Year";
-            classroomYear.HeaderText = "Năm học";
-            classroomYear.MinimumWidth = 8;
-            classroomYear.Name = "classroomYear";
-            classroomYear.Width = 150;
+            dataGridViewTextBoxColumn6.DataPropertyName = "Address";
+            dataGridViewTextBoxColumn6.HeaderText = "Địa chỉ";
+            dataGridViewTextBoxColumn6.MinimumWidth = 8;
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.Width = 150;
             // 
             // fManager
             // 
@@ -962,6 +1045,8 @@
             panel6.PerformLayout();
             panel7.ResumeLayout(false);
             panel7.PerformLayout();
+            tpTeacher.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dtgvTeacher).EndInit();
             ResumeLayout(false);
         }
 
@@ -1062,5 +1147,13 @@
         private DataGridViewTextBoxColumn subjetId;
         private DataGridViewTextBoxColumn subjectName;
         private DataGridViewTextBoxColumn subjectGrade;
+        private TabPage tpTeacher;
+        private Button btnAssignSubject;
+        private DataGridView dtgvTeacher;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DTO_QLHT.Migrations
 {
     [DbContext(typeof(student_managementContext))]
-    [Migration("20240425151624_1")]
+    [Migration("20240515112715_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -208,6 +208,21 @@ namespace DTO_QLHT.Migrations
                     b.ToTable("SubjectGradeSemesters");
                 });
 
+            modelBuilder.Entity("SubjectTeacher", b =>
+                {
+                    b.Property<int>("SubjectsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeachersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SubjectsId", "TeachersId");
+
+                    b.HasIndex("TeachersId");
+
+                    b.ToTable("SubjectTeacher");
+                });
+
             modelBuilder.Entity("Teach", b =>
                 {
                     b.Property<int>("Id")
@@ -376,6 +391,21 @@ namespace DTO_QLHT.Migrations
                         .IsRequired();
 
                     b.Navigation("SubjectGrade");
+                });
+
+            modelBuilder.Entity("SubjectTeacher", b =>
+                {
+                    b.HasOne("Subject", null)
+                        .WithMany()
+                        .HasForeignKey("SubjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Teacher", null)
+                        .WithMany()
+                        .HasForeignKey("TeachersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Teach", b =>

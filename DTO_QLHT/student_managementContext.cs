@@ -59,8 +59,6 @@ namespace DTO_QLHT
         //        .WithMany(t => t.Teaches)
         //        .OnDelete(DeleteBehavior.Restrict);
 
-        ////     Thiết lập các ràng buộc ngoại khác tại đây
-
         //    base.OnModelCreating(modelBuilder);
         //}
 

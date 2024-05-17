@@ -206,6 +206,21 @@ namespace DTO_QLHT.Migrations
                     b.ToTable("SubjectGradeSemesters");
                 });
 
+            modelBuilder.Entity("SubjectTeacher", b =>
+                {
+                    b.Property<int>("SubjectsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeachersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SubjectsId", "TeachersId");
+
+                    b.HasIndex("TeachersId");
+
+                    b.ToTable("SubjectTeacher");
+                });
+
             modelBuilder.Entity("Teach", b =>
                 {
                     b.Property<int>("Id")
@@ -374,6 +389,21 @@ namespace DTO_QLHT.Migrations
                         .IsRequired();
 
                     b.Navigation("SubjectGrade");
+                });
+
+            modelBuilder.Entity("SubjectTeacher", b =>
+                {
+                    b.HasOne("Subject", null)
+                        .WithMany()
+                        .HasForeignKey("SubjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Teacher", null)
+                        .WithMany()
+                        .HasForeignKey("TeachersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Teach", b =>

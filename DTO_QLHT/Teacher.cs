@@ -15,4 +15,5 @@ public class Teacher
     public virtual User User { get; set; }
 
     public virtual ICollection<Teach> Teaches { get; set; }
+    public virtual List<Subject> Subjects { get; set; }
 }

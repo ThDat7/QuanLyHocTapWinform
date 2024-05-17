@@ -23,6 +23,7 @@ namespace GUI_QLHT
             FakeClassroom();
             FakeStudent();
             FakeSubject();
+            FakeTeacherAssignSubject();
             FakeTeach();
             FakeSubjectGrade();
         }
@@ -163,6 +164,30 @@ namespace GUI_QLHT
             }
             context.SaveChanges();
         }
+        public void FakeTeacherAssignSubject()
+        {
+            var random = new Random();
+            var teachers = context.Teachers.ToList();
+            var subjects = context.Subjects.ToList();
+
+            foreach(var teacher in teachers)
+            {
+                teacher.Subjects = new List<Subject>();
+                var usedSubjectsId = new List<int>();
+                for (int i = 0; i < 4; i++)
+                {
+                    var avaiableSubjects = subjects.Where(t => !usedSubjectsId.Contains(t.Id)).ToList();
+                    var randomSubject = avaiableSubjects[random.Next(avaiableSubjects.Count)];
+                    var subjectsAssignTeacher = subjects.Where((t) => randomSubject.Name == t.Name).ToList();
+                    usedSubjectsId.AddRange(subjectsAssignTeacher.Select(t => t.Id).ToList());
+
+                    teacher.Subjects.AddRange(subjectsAssignTeacher);
+                    context.Teachers.Update(teacher);
+                }
+            }
+
+            context.SaveChanges();
+        }
         public void FakeTeach()
         {
             var random = new Random();
@@ -180,11 +205,12 @@ namespace GUI_QLHT
 
                     if (availableSubjects.Any())
                     {
-                        var randomSubject = availableSubjects[random.Next(availableSubjects.Count)];
+                        Subject randomSubject = (Subject) availableSubjects[random.Next(availableSubjects.Count)];
+                        var teacherCanTeach = teachers.Where(t => t.Subjects.Contains(randomSubject)).ToList();
 
                         context.Teaches.Add(new Teach()
                         {
-                            TeacherId = teachers[random.Next(teachers.Count)].Id,
+                            TeacherId = teacherCanTeach[random.Next(teacherCanTeach.Count)].Id,
                             SubjectId = randomSubject.Id,
                             ClassroomId = classroom.Id
                         });

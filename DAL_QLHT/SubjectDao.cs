@@ -51,5 +51,15 @@ namespace DAL_QLHT
                 return db.SaveChanges() > 0;
             }
         }
+
+        public List<Subject> SearchExcludeAssigned(String keyword, int teacherId)
+        {
+            using (db = new student_managementContext())
+            {
+                var assigned = db.Subjects.Where(s => s.Teachers.Any(t => t.Id == teacherId)).ToList();
+                var query = db.Subjects.Where(s => s.Name.Contains(keyword) && !assigned.Contains(s));
+                return query.ToList<Subject>();
+            }
+        }
     }
 }

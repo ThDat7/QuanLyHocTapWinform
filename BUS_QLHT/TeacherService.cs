@@ -16,9 +16,29 @@ namespace BUS_QLHT
             return teacherDao.SearchNotIsHomeroomTeacher(keyword, classroomId);
         }
 
-        public List<Object> Search(string keyword, int subjectId)
+        public List<Object> Search(string keyword, int? subjectId)
         {
             return teacherDao.Search(keyword, subjectId);
+        }
+
+        public List<Object> GetAll()
+        {
+            return teacherDao.GetAll();
+        }
+
+        public Object Get(int id) 
+        {
+            return teacherDao.Get(id);
+        }
+
+        public Boolean RemoveSubjectToTeacher(int teacherId, int subjectId)
+        {
+            return teacherDao.RemoveSubjectToTeacher(teacherId, subjectId);
+        }
+
+        public Boolean AssignSubject(int teacherId, int subjectId)
+        {
+            return teacherDao.AssignSubject(teacherId, subjectId);
         }
     }
 }

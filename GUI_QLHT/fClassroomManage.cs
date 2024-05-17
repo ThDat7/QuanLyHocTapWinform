@@ -70,7 +70,7 @@ namespace GUI_QLHT
 
             if (homeroomTeacherBinding.DataSource != null)
             {
-                txbHomeroomName.DataBindings.Add(new Binding("Text", homeroomTeacherBinding.DataSource, "Name", true, DataSourceUpdateMode.Never));
+                txbHomeroomName.DataBindings.Add(new Binding("Text", homeroomTeacherBinding.DataSource, "Name", true));
                 txbHomeroomDob.DataBindings.Add(new Binding("Text", homeroomTeacherBinding.DataSource, "Dob", true, DataSourceUpdateMode.Never));
                 txbHomeroomAddress.DataBindings.Add(new Binding("Text", homeroomTeacherBinding.DataSource, "Address", true, DataSourceUpdateMode.Never));
             }
@@ -107,10 +107,12 @@ namespace GUI_QLHT
         private void btnSearchTeacher2_Click(object sender, EventArgs e)
         {
             int subjectSelectedIndex = cbSubject.SelectedIndex;
-            Subject selectedSubject = subjects[subjectSelectedIndex];
+            int? subjectId = null;
+            if (subjectSelectedIndex != -1)
+                subjectId = subjects[subjectSelectedIndex].Id;
 
             string keyword = txbSearchSubjectTeacher.Text;
-            searchSubjectTeachersBinding.DataSource = teacherService.Search(keyword, selectedSubject.Id);
+            searchSubjectTeachersBinding.DataSource = teacherService.Search(keyword, subjectId);
         }
 
         private int GetFirstCellSelectedRow(DataGridView dtgv)
@@ -124,7 +126,7 @@ namespace GUI_QLHT
             classroomService.AddStudentToClass(classroomId, idAdd);
 
             Object student = dtgvSearchStudent.CurrentRow.DataBoundItem;
-            studentInClassBinding.Add(student);
+            studentInClassBinding.DataSource = studentService.GetInClass(classroomId);
             searchStudentsBinding.Remove(student);
         }
 
@@ -149,21 +151,23 @@ namespace GUI_QLHT
             DataGridViewRow teacherRow = dtgvSearchTeacher2.CurrentRow;
             Object subjectTeacher = new
             {
-                Id = id,
+                TeacherId = id,
+                SubjectId = selectedSubject.Id,
                 SubjectName = selectedSubject.Name,
                 Name = teacherRow.Cells[1].Value?.ToString(),
                 Dob = teacherRow.Cells[2].Value?.ToString(),
                 Address = teacherRow.Cells[3].Value?.ToString()
             };
 
-            subjectTeachersBinding.Add(subjectTeacher);
+            subjectTeachersBinding.DataSource = classroomService.GetSubjetTeachers(classroomId);
             searchSubjectTeachersBinding.Remove(teacherRow.DataBoundItem);
         }
 
         private void btnRemoveTeacher_Click(object sender, EventArgs e)
         {
             int idRemove = GetFirstCellSelectedRow(dtgvSubjectTeachers);
-            teachService.RemoveTeach(idRemove);
+            int subjectIdRemove = int.Parse(dtgvSubjectTeachers.CurrentRow.Cells[1].Value.ToString());
+            teachService.RemoveTeach(idRemove, subjectIdRemove);
             Object subjetTeacher = dtgvSubjectTeachers.CurrentRow.DataBoundItem;
             subjectTeachersBinding.Remove(subjetTeacher);
         }
@@ -176,7 +180,8 @@ namespace GUI_QLHT
             object teacher = dtgvSearchTeacher1.CurrentRow.DataBoundItem;
             searchHomeroomTeachersBinding.Remove(teacher);
 
-            homeroomTeacherBinding.DataSource = teacher;
+            homeroomTeacherBinding.DataSource = classroomService.GetHomeroomTeacher(classroomId);
+            //txbHomeroomName.DataBindings.CollectionChanged();
 
         }
 

@@ -30,5 +30,10 @@ namespace BUS_QLHT
         {
             return subjectDao.DeleteSubject(id);
         }
+
+        public List<Subject> SearchForAssign(String keyword, int teacherId)
+        {
+            return subjectDao.SearchExcludeAssigned(keyword, teacherId);
+        }
     }
 }
