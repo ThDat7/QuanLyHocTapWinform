@@ -12,6 +12,11 @@ namespace BUS_QLHT
     {
         SubjectDao subjectDao = new SubjectDao();
 
+        public List<Subject> GetSubjectNoAssignedByGrade(GradeEnum grade, int classroomId)
+        {
+            return subjectDao.GetSubjectNoAssignedByGrade(grade, classroomId);
+        }
+
         public List<Subject> GetSubjectByGrade(GradeEnum grade)
         {
             return subjectDao.GetSubjectByGrade(grade);

@@ -85,7 +85,7 @@ namespace GUI_QLHT
         {
             GradeEnum grade = classroom.Grade;
             cbSubject.Items.Clear();
-            subjects = subjectService.GetSubjectByGrade(grade);
+            subjects = subjectService.GetSubjectNoAssignedByGrade(grade, classroomId);
             foreach (Subject sj in subjects)
             {
                 cbSubject.Items.Add(sj.Name);
@@ -160,6 +160,7 @@ namespace GUI_QLHT
             };
 
             subjectTeachersBinding.DataSource = classroomService.GetSubjetTeachers(classroomId);
+            LoadSubjects();
             searchSubjectTeachersBinding.Remove(teacherRow.DataBoundItem);
         }
 
@@ -170,6 +171,7 @@ namespace GUI_QLHT
             teachService.RemoveTeach(idRemove, subjectIdRemove);
             Object subjetTeacher = dtgvSubjectTeachers.CurrentRow.DataBoundItem;
             subjectTeachersBinding.Remove(subjetTeacher);
+            LoadSubjects();
         }
 
         private void btnSetHomeroom_Click(object sender, EventArgs e)

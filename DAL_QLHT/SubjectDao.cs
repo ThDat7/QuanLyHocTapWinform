@@ -14,12 +14,16 @@ namespace DAL_QLHT
         {
         }
 
-        public List<Subject> GetSubjectByGrade(GradeEnum grade)
+        public List<Subject> GetSubjectNoAssignedByGrade(GradeEnum grade, int classroomId)
         {
             using (db = new student_managementContext())
             {
+                var excludeSubjectId = db.Teaches
+                                    .Where(t => t.ClassroomId == classroomId)
+                                    .Select(t => t.SubjectId).ToList();
+
                 var query = db.Subjects
-                            .Where(s => s.Grade == grade)
+                            .Where(s => s.Grade == grade && !excludeSubjectId.Contains(s.Id))
                             .Select(s => s);
                 return query.ToList<Subject>();
             }
@@ -68,6 +72,17 @@ namespace DAL_QLHT
             {
                 var query = db.Subjects
                             .Where(s => s.Grade == grade && s.Name.Contains(kw))
+                            .Select(s => s);
+                return query.ToList<Subject>();
+            }
+        }
+
+        public List<Subject> GetSubjectByGrade(GradeEnum grade)
+        {
+            using (db = new student_managementContext())
+            {
+                var query = db.Subjects
+                            .Where(s => s.Grade == grade)
                             .Select(s => s);
                 return query.ToList<Subject>();
             }
